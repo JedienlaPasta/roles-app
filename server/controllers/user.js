@@ -21,6 +21,8 @@ export const register = async (req, res) => {
     //     username,
     //     password: hashedPassword
     // })
+
+    // video timestamp (21:46) // JWT Auth
 }
 
 export const userAuth = async (req, res) => {
