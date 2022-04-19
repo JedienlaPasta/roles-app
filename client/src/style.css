@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+:root {
+    /* colors */
+    --clr-b1: #3f93e0;
+    --clr-b2: #3273b1;
+    --clr-gray: #e3e5e9;
+    --clr-gray2: #d7d9dd;
+    /* box-shadow */
+    --shd-v1: 6px 8px 15px 3px rgba(100, 100, 100, 0.2);
+}
+body {
+    font-size: 16px;
+}
+body, button, input {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* auth ================================================================ */
+.login-container {
+    width: 300px;
+    height: 250px;
+    padding: 30px 10px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    box-shadow: var(--shd-v1);
+    border-radius: 0.8rem;
+}
+.login-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    font-size: 1.5rem;
+    top: 8%;
+    right: 8%;
+    color: var(--clr-gray2);
+    border-radius: 50%;
+}
+.login-form {
+    width: fit-content;
+    margin: auto;
+    position: relative;
+}
+.login-title {
+    margin-top: 20px;
+}
+.form-item {
+    top: 5px;
+    width: 224px;
+    height: 40px;
+    position: relative;
+    margin-top: 20px;
+}
+.login-input {
+    width: 200px;
+    padding: 10px 10px;
+    border: 2px solid var(--clr-gray);
+    border-radius: 0.5rem;
+    outline: none;
+    background: none;
+    position: absolute;
+    transition: border 200ms ease-in;
+}
+.login-input:focus {
+    border: 2px solid var(--clr-b1);
+}
+.login-input:focus ~ .login-label,
+.login-input:not(:placeholder-shown).login-input:not(:focus) ~ .login-label {
+    top: -0.8rem;
+    left: 0.7rem;
+    font-size: 0.7rem;
+}
+.login-input:focus ~ .login-label {
+    color: var(--clr-b1);
+}
+.login-label {
+    position: relative;
+    padding: 0 0.5rem;
+    left: 0.5rem;
+    top: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #818181;
+    transition: top 200ms ease-in,
+        left 200ms ease-in,
+        color 200ms ease-in,
+        font-size 200ms ease-in;
+    background-color: white;
+    cursor: text;
+}
+.login-button {
+    font-size: 0.9rem;
+    padding: 9px 18px;
+    border-radius: 0.5rem;
+    border: 0;
+    margin-top: 25px;
+    position: absolute;
+    right: 0;
+    background-color: var(--clr-b1);
+    color: white;
+}
+.login-button:active {
+    background-color: var(--clr-b2);
+}
+
+/* form ================================================================ */
+.body-container {
+    width: fit-content;
+    max-width: 100%;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-top: 50px;
+    padding: 30px;
+    background-color: #f4fafc;
+    box-shadow: var(--shd-v1);
+    border-radius: 0.8rem;
+}
+.form-consulta {
+    margin-top: 15px;
+    width: fit-content;
+}
+.inputs {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 5px;
+}
+.inputs > input {
+    font-size: 0.9em;
+    max-width: 140px;
+    padding: 10px 10px;
+    border: 2px solid var(--clr-gray);
+    border-radius: 0.5rem;
+    outline: none;
+    background: none;
+}
+.form-consulta > button {
+    font-size: 0.9em;
+    padding: 9px 18px;
+    border-radius: 0.5rem;
+    border: 0;
+    background-color: var(--clr-b1);
+    margin-top: -100%;
+    color: white;
+    width: 100%;
+    
+    font-weight: 600;
+}
+.form-consulta > button:active {
+    background-color: var(--clr-b2);
+}
+
+/* tabla =============================================================== */
+.titulo-resultado {
+    margin-top: 20px;
+}
+table {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    text-align: center;
+    margin-top: 20px;
+}
+td, th {
+    white-space: nowrap;
+    padding: 5px 10px;
+    text-align: left;
+}
+th {
+    border-radius: 50px 0 0 50px;
+}
+td {
+    border-radius: 0 50px 50px 0;
+}
+tr:nth-of-type(odd) {
+    background-color: #2f84a54d;
+}
+
+@media (max-width: 500px) {
+    body {
+        font-size: 12px;
+    }
+    .app-container {
+        padding: 25px 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    body {
+        font-size: 10px;
+    }
+    .app-container {
+        padding: 20px 5px;
+    }
+}
