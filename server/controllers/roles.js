@@ -15,12 +15,27 @@ export const createRol = async (req, res) => {
     res.status(200).json({ message: 'post rol' })
 }
 
+// export const getRolById = async (req, res) => {
+//     const rol = await RolData.findById(req.params.id)
+//     if (rol) {
+//         res.status(200).json({rol, op: 'success'})
+//     }
+// }
+
 export const updateRol = async (req, res) => {
-    res.status(200).json({ message: 'update rol' })
+    const rol = await RolData.findById(req.params.id)
+    // res.status(200).json({ message: 'rol updated' })
+    if (rol) {
+        res.status(200).json({ rol, message: 'rol updated' })
+    }
 }
 
 export const deleteRol = async (req, res) => {
-    res.status(200).json({ message: 'delete rol' })
+    const rol = await RolData.findById(req.params.id)
+    // res.status(200).json({ message: 'rol deleted' })
+    if (rol) {
+        res.status(200).json({ rol, message: 'rol deleted' })
+    }
 }
 
 // actualizar reglamento de la pagina de transparencia

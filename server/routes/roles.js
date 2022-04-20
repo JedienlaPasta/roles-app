@@ -4,6 +4,7 @@ import { getRoles, createRol, updateRol, deleteRol } from '../controllers/roles.
 const router = express.Router()
 
 router.get('/', getRoles)
+// router.get('/:id', getRolById)
 router.post('/', createRol)
 router.patch('/:id', updateRol)
 router.delete('/:id', deleteRol)

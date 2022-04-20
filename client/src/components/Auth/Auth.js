@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FaUserAstronaut } from 'react-icons/fa'
+import { DataContext } from '../../context/DataContext'
 
 export default function Auth() {
-    const [user, setUser] = useState({username: '', password: ''})
+    // const [user, setUser] = useState({name: '', password: ''})
+    const { user, setUser } = useContext(DataContext)
 
     const login = (event) => {
         event.preventDefault()
+        
     }
 
     return (
@@ -16,7 +19,7 @@ export default function Auth() {
             <form className='login-form' onSubmit={login}>
                 <h3 className='login-title'>Iniciar Sesión</h3>
                 <div className="form-item">
-                    <input type="text" id='user' placeholder=' ' className='login-input' autoComplete='off' required value={user.username} onChange={(e) => setUser(val => ({...val, username: e.target.value }))} />
+                    <input type="text" id='user' placeholder=' ' className='login-input' autoComplete='off' required value={user.name} onChange={(e) => setUser(val => ({...val, name: e.target.value }))} />
                     <label htmlFor='user' className='login-label'>Usuario</label>
                 </div>
                 <div className="form-item">

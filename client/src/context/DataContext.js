@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useState } from "react";
 
 export const ACTIONS = {
     FETCH_MATCHES: 'fetch_matches'
@@ -19,9 +19,10 @@ export const DataContext = createContext()
 
 export const DataProvider = ({ children }) => {
     const [roles, dispatch] = useReducer(reducer, initialState)
+    const [user, setUser] = useState({name: '', password: ''})
 
     return (
-        <DataContext.Provider value={{ roles, dispatch }}>
+        <DataContext.Provider value={{ roles, dispatch, user, setUser }}>
             { children }
         </DataContext.Provider>
     )
