@@ -8,8 +8,7 @@ export const register = async (req, res) => {
     const userExists = await User.findOne({ name })
 
     if (userExists) {
-        res.status(400)
-        throw new Error('User already exists')
+        return res.status(400).json({ message: 'User already exists' })
     }
 
     //Hash password
@@ -27,21 +26,33 @@ export const register = async (req, res) => {
 
 export const userAuth = async (req, res) => {
     const { name, password } = req.body
-    
+
     const user = await User.findOne({ name })
+
+    if (user == null) {
+        return res.response(400).send('cannot find user')
+    }
+
     try {
-        if (user && (bcrypt.compare(password, user.password))) {
+        if (await bcrypt.compare(password, user.password)) {
             res.json({
-                _id: user._id,
-                name: user.name
+                id: user.id,
+                name: user.name,
+                token: accessToken(user.id)
             })
         }
-        res.status(400).json({ message: 'credenciales incorrectas' })
+        else {
+            res.send('not allowed')
+        }
     } catch (error) {
-        res.status(400).json({ message: error.message })
+        res.status(400).json(error.message)
     }
 }
 
 export const getUser = async (req, res) => {
-    res.send('get user data')
+    const id = req.id
+    const user = await User.findOne({ id }).select('-password')
+    res.json({ user })
 }
+
+const accessToken = (id) => jwt.sign(id, process.env.ACCESS_TOKEN_SECRET)

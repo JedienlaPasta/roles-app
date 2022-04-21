@@ -1,6 +1,6 @@
 import { fetchUser } from "../api/api";
 
-export const authUser = async () => {
+export const authUser = async (setUser) => {
     try {
         
         const { data } = await fetchUser()
