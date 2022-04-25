@@ -1,9 +1,10 @@
 import express from 'express'
 import { getRoles, createRol, updateRol, deleteRol } from '../controllers/roles.js'
+import { authenticateToken } from '../middleware/authMiddleware.js'
 
 const router = express.Router()
 
-router.get('/', getRoles)
+router.get('/', authenticateToken, getRoles)
 // router.get('/:id', getRolById)
 router.post('/', createRol)
 router.patch('/:id', updateRol)

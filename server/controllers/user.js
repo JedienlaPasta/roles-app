@@ -3,22 +3,20 @@ import bcrypt from 'bcryptjs'
 import User from '../models/userModel.js'
 
 export const register = async (req, res) => {
-    const { name, password } = req.body
+    const { name, password, role } = req.body
 
     const userExists = await User.findOne({ name })
-
     if (userExists) {
         return res.status(400).json({ message: 'User already exists' })
     }
 
-    //Hash password
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password, salt)
 
-    //Create user
     const user = await User.create({
         name,
-        password: hashedPassword
+        password: hashedPassword,
+        role
     })
 
     res.status(201).json({message: 'user registered succesfuly!'})
@@ -28,22 +26,20 @@ export const userAuth = async (req, res) => {
     const { name, password } = req.body
 
     const user = await User.findOne({ name })
-
     if (user == null) {
-        return res.response(400).send('cannot find user')
+        return res.status(400).json({ message: 'user not found' })
     }
 
     try {
         if (await bcrypt.compare(password, user.password)) {
+            const token = accessToken(user.id)
+            res.cookie('token', token, { httpOnly: true, maxAge: 60000 })
             res.json({
-                id: user.id,
-                name: user.name,
-                token: accessToken(user.id)
+                message: 'signed in successfully',
+                isAuthenticated: true
             })
         }
-        else {
-            res.send('not allowed')
-        }
+        else res.status(401).json({ message: 'not authorized, invalid credentials' })
     } catch (error) {
         res.status(400).json(error.message)
     }
@@ -55,4 +51,15 @@ export const getUser = async (req, res) => {
     res.json({ user })
 }
 
-const accessToken = (id) => jwt.sign(id, process.env.ACCESS_TOKEN_SECRET)
+export const clearUser = async (req, res) => {
+    res.clearCookie('token')
+    res.json({ user: { id: req.id.id }, success: true })
+}
+
+export const isAuth = async (req, res) => {
+    const { id } = req.id
+    const user = await User.findOne({ id }).select('-password')
+    res.status(200).json({ isAuthenticated: true, user: { name: user.name, role: user.role }})
+}
+
+const accessToken = (id) => jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 60})

@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser'
 
 import rolesRoutes from './routes/roles.js'
 import userRoutes from './routes/user.js'
@@ -11,6 +12,7 @@ dotenv.config()
 
 app.use(express.json({ extended: true }))
 app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 app.use(cors())
 
 app.use('/roles', rolesRoutes)

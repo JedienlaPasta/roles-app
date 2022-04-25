@@ -1,14 +1,31 @@
 import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FaUserAstronaut } from 'react-icons/fa'
 import { DataContext } from '../../context/DataContext'
+import { AuthService } from '../../services/AuthService'
 
 export default function Auth() {
-    // const [user, setUser] = useState({name: '', password: ''})
-    const { user, setUser } = useContext(DataContext)
+    const [user, setUser] = useState({name: '', password: ''})
+    const [message, setMessage] = useState(null) // or maybe ''
+    // const { user, setUser, isAuth } = useContext(DataContext)
+    const Context = useContext(DataContext)
+
+    const history = useNavigate()
 
     const login = (event) => {
         event.preventDefault()
-        
+        AuthService.login(user).then(data => {
+            const { isAuthenticated, message } = data
+            console.log(data)
+            if (isAuthenticated) {
+                Context.setUser(data.user)
+                Context.setIsAuth(isAuthenticated)
+                // history('/')
+            }
+            else {
+                setMessage(message || 'null message')
+            }
+        })
     }
 
     return (
@@ -28,6 +45,7 @@ export default function Auth() {
                 </div>
                 <button className='login-button'>Iniciar Sesión</button>
             </form>
+            {/* { message && <Message message={message} /> } */}
         </div>
     )
 }
