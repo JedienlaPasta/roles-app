@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { DataContext } from '../../context/DataContext'
-import Form from './Form/FormRol'
+import FormRol from './Form/FormRol'
+import FormRut from './Form/FormRut'
 import List from './List/List'
 
 export default function AppBody() {
@@ -16,8 +17,9 @@ export default function AppBody() {
     return (
         <div className='body-container'>
             <h2 className='titulo-consulta'>Consulta por Rol</h2>
-            <Form />
+            <FormRol />
             { roles && <List /> }
+            <FormRut />
         </div>
     )
 }

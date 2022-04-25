@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes, Link, Route, useParams } from 'react-router-dom'
+import { logout } from '../../actions/users'
 
 export default function Navbar() {
 
@@ -15,7 +16,7 @@ export default function Navbar() {
                         {/* <Link className='link-item' to='/auth'>auth</Link> */}
                     </li>
                     <li className='link'>
-                        <Link className='link-item' to='/auth'>logout</Link>
+                        <Link className='link-item' to='/auth' onClick={logout}>logout</Link>
                     </li>
                 </ul>
             </nav>

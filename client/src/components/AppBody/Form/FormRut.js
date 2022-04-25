@@ -3,11 +3,8 @@ import { getRoles } from '../../../actions/roles'
 import { isAuthenticated } from '../../../actions/users'
 import { DataContext } from '../../../context/DataContext'
 
-export default function FormRol() {
-    const [rol, setRol] = useState({ 
-        rol1: '', 
-        rol2: '' 
-    })
+export default function FormRut() {
+    const [rut, setRut] = useState('')
 
     const { dispatch, setUser, setIsAuth } = useContext(DataContext)
 
@@ -18,16 +15,16 @@ export default function FormRol() {
             setUser(user)
             setIsAuth(isAuthenticated)
             if (isAuthenticated) {
-                getRoles(rol, dispatch)
+                // getRoles(rol, dispatch) // change this one
             }
         })
     }
 
     return (
         <form className='form-consulta' onSubmit={handleSubmit}>
+
             <span className='inputs'>
-            <input type='number' name='rol_1' required placeholder='Ingresar MZ...' value={rol.rol1} onChange={(e) => setRol(item => ({...item, rol1: e.target.value}))} />
-            <input type='number' name='rol_2' required placeholder='Ingresar PD...' value={rol.rol2} onChange={(e) => setRol(item => ({...item, rol2: e.target.value}))} />
+            <input type='number' name='rut' required placeholder='Ingresar RUT...' value={rut} onChange={(e) => setRut(e.target.value)} />
             </span>
             <br />
             <button type='submit'>Buscar</button>
