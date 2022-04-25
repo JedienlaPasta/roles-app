@@ -23,7 +23,8 @@ export const register = async (req, res) => {
 }
 
 export const userAuth = async (req, res) => {
-    const { name, password } = req.body
+    const { name, password } = req.body.user
+    console.log(req.body)
 
     const user = await User.findOne({ name })
     if (user == null) {
@@ -33,10 +34,11 @@ export const userAuth = async (req, res) => {
     try {
         if (await bcrypt.compare(password, user.password)) {
             const token = accessToken(user.id)
-            res.cookie('token', token, { httpOnly: true, maxAge: 60000 })
+            res.cookie('token', token, { httpOnly: true, maxAge: 20000 })
             res.json({
                 message: 'signed in successfully',
-                isAuthenticated: true
+                isAuthenticated: true,
+                user: { name: user.name, role: user.role }
             })
         }
         else res.status(401).json({ message: 'not authorized, invalid credentials' })
@@ -62,4 +64,4 @@ export const isAuth = async (req, res) => {
     res.status(200).json({ isAuthenticated: true, user: { name: user.name, role: user.role }})
 }
 
-const accessToken = (id) => jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 60})
+const accessToken = (id) => jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 20})

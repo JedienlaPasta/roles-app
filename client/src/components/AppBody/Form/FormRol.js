@@ -1,5 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { getRoles } from '../../../actions/roles'
+import { isAuthenticated } from '../../../actions/users'
 import { DataContext } from '../../../context/DataContext'
 
 export default function Form() {
@@ -8,11 +9,18 @@ export default function Form() {
         rol2: '' 
     })
 
-    const { dispatch } = useContext(DataContext)
+    const { dispatch, setUser, setIsAuth } = useContext(DataContext)
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        getRoles(rol, dispatch)
+        isAuthenticated().then(data => {
+            const { isAuthenticated, user } = data
+            setUser(user)
+            setIsAuth(isAuthenticated)
+            if (isAuthenticated) {
+                getRoles(rol, dispatch)
+            }
+        })
     }
 
     return (

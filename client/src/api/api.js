@@ -1,12 +1,16 @@
 import axios from 'axios'
 
 // Roles
-const roles_url = 'http://localhost:5000/roles'
+// const roles_url = 'http://localhost:5000/roles'
 // const url = 'https://rol-cobro.herokuapp.com/roles'
 
-export const fetchRoles = (rol) => axios.get(roles_url, { params: rol })
+export const fetchRoles = (rol) => axios.get('/roles', { params: rol })
 
 // Usuarios
-const users_url = 'http://localhost:5000/users/login'
+// const users_url = 'http://localhost:5000/users/login'
 
-export const fetchUser = () => axios.post(users_url)
+export const userAuth = (user) => axios.post('/users/login', { user })
+
+export const clearUser = () => axios.get('/users/logout')
+
+export const isUserAuth = () => axios.get('/users/auth')

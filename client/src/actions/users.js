@@ -1,11 +1,24 @@
-import { fetchUser } from "../api/api";
+import { clearUser, isUserAuth, userAuth } from "../api/api";
 
-export const authUser = async (setUser) => {
+export const login = async (user) => {
     try {
-        
-        const { data } = await fetchUser()
-        dispatch({ type: ACTIONS.FETCH_MATCHES, payload: data })
+        const { data } = await userAuth(user)
+        return data
     } catch (error) {
         console.log(error.message)
+    }
+}
+
+export const logout = async () => {
+    await clearUser()
+    return { user: { name: '', role: '' }}
+}
+
+export const isAuthenticated = async () => {
+    try {
+        const { data } = await isUserAuth()
+        return data
+    } catch (error) {
+        return { isAuthenticated: false, user: { name: '', role:'' }}
     }
 }

@@ -4,31 +4,21 @@ import { Routes, Link, Route, useParams } from 'react-router-dom'
 export default function Navbar() {
 
     return (
-        <header>
-            <nav>
-                <ul>
-                    <li>
-                        <Link to='/'>home</Link>
+        <header className='nav-header'>
+            <h2>ROL COBRO</h2>
+            <nav className='nav'>
+                <ul className='nav-links'>
+                    <li className='link'>
+                        <Link className='link-item' to='/'>home</Link>
                     </li>
-                    <li>
-                        <Link to='/auth'>auth</Link>
+                    <li className='link'>
+                        {/* <Link className='link-item' to='/auth'>auth</Link> */}
+                    </li>
+                    <li className='link'>
+                        <Link className='link-item' to='/auth'>logout</Link>
                     </li>
                 </ul>
-
-                <Routes>
-                    <Route path='/:id' element={<Child />} />
-                </Routes>
             </nav>
         </header>
-    )
-}
-
-const Child = () => {
-    let { id } = useParams()
-
-    return (
-        <div>
-            <p>ID: {id}</p>
-        </div>
     )
 }

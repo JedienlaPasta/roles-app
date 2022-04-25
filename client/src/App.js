@@ -1,17 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import AppBody from './components/AppBody/AppBody'
 import Auth from './components/Auth/Auth'
 import Navbar from './components/Navbar/Navbar'
+import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 
 export default function App() {
-  // const [bool, setBool] = useState(false)
+  
   return (
     <div className='app-container'>
-      <Navbar />
       <Routes>
-        <Route path="/" element={ <AppBody /> } />
-        <Route exact path='/auth' element={ <Auth /> } />
+        <Route path="/*" element={ <PrivateRoute /> }>
+          <Route path="/*" element={ [<Navbar key='navApp'/>, <AppBody key='body' />] }/>
+        </Route>
+        <Route exact path='/auth/*' element={ <Auth key='auth' /> }/>
       </Routes>
     </div>
   )
