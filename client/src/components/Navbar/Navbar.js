@@ -1,8 +1,18 @@
-import React from 'react'
-import { Routes, Link, Route, useParams } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { logout } from '../../actions/users'
+import { DataContext } from '../../context/DataContext'
+import { RiLogoutBoxRLine } from 'react-icons/ri'
 
 export default function Navbar() {
+    const { setUser, setIsAuth } = useContext(DataContext)
+
+    const handleLogout = () => {
+        logout().then(data => {
+            setUser(data.user)
+            setIsAuth(data.isAuthenticated)
+        })
+    }
 
     return (
         <header className='nav-header'>
@@ -10,13 +20,10 @@ export default function Navbar() {
             <nav className='nav'>
                 <ul className='nav-links'>
                     <li className='link'>
-                        <Link className='link-item' to='/'>home</Link>
+                        <Link className='link-item' to='/rol2'>rol2</Link>
                     </li>
                     <li className='link'>
-                        {/* <Link className='link-item' to='/auth'>auth</Link> */}
-                    </li>
-                    <li className='link'>
-                        <Link className='link-item' to='/auth' onClick={logout}>logout</Link>
+                        <Link className='link-item logout' to='/auth' onClick={handleLogout}><RiLogoutBoxRLine/></Link>
                     </li>
                 </ul>
             </nav>

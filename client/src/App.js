@@ -11,8 +11,11 @@ export default function App() {
     <div className='app-container'>
       <Routes>
         <Route path="/*" element={ <PrivateRoute /> }>
-          <Route path="/*" element={ [<Navbar key='navApp'/>, <AppBody key='body' />] }/>
+          <Route path="/*" element={ [<Navbar key='navApp'/>, <AppBody key='rolbody' />] }/>
         </Route>
+        {/* <Route path="/rol2/*" element={ <PrivateRoute /> }>
+          <Route path="/rol2/*" element={ [<Navbar key='navApp'/>, <AppBody key='rol2body' />] }/>
+        </Route> */}
         <Route exact path='/auth/*' element={ <Auth key='auth' /> }/>
       </Routes>
     </div>

@@ -34,7 +34,8 @@ export const DataProvider = ({ children }) => {
 
     useEffect(() => {
         console.log('Is the user authenticated?: '+isAuth)
-    }, [isAuth])
+        console.log(user)
+    }, [isAuth, user])
 
     return (
         <div>

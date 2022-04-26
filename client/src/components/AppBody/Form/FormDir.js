@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
-import { getRoles, getRolesByRUT } from '../../../actions/roles'
+import { getRoles, getRolesByDIR } from '../../../actions/roles'
 import { isAuthenticated } from '../../../actions/users'
 import { DataContext } from '../../../context/DataContext'
 
 export default function FormRut() {
-    const [rut, setRut] = useState('')
+    const [dir, setDir] = useState('')
 
     const { dispatch, setUser, setIsAuth } = useContext(DataContext)
 
@@ -15,7 +15,7 @@ export default function FormRut() {
             setUser(user)
             setIsAuth(isAuthenticated)
             if (isAuthenticated) {
-                getRolesByRUT(rut, dispatch)
+                getRolesByDIR(dir, dispatch)
             }
         })
     }
@@ -23,7 +23,7 @@ export default function FormRut() {
     return (
         <form className='form-consulta' onSubmit={handleSubmit}>
             <span className='inputs'>
-            <input type='number' name='rut' required placeholder='Ingresar RUT sin DV...' value={rut} onChange={(e) => setRut(e.target.value)} />
+            <input type='text' name='dir' required placeholder='Ingresar Dirección...' value={dir} onChange={(e) => setDir(e.target.value)} />
             </span>
             <br />
             <button type='submit'>Buscar</button>

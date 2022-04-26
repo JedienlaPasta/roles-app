@@ -10,8 +10,13 @@ export const login = async (user) => {
 }
 
 export const logout = async () => {
-    await clearUser()
-    return { user: { name: '', role: '' }}
+    try {
+        await clearUser()
+        console.log("cookie cleared")
+    } catch (error) {
+        console.log("couldn't clear cookie")
+    }
+    return { isAuthenticated: false, user: { name: '', role: '' }}
 }
 
 export const isAuthenticated = async () => {

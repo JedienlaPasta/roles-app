@@ -54,8 +54,12 @@ export const getUser = async (req, res) => {
 }
 
 export const clearUser = async (req, res) => {
-    res.clearCookie('token')
-    res.json({ user: { id: req.id.id }, success: true })
+    try {
+        res.clearCookie('token')
+    } catch (error) {
+        res.json({ message: error })
+    }
+    res.json({ success: true })
 }
 
 export const isAuth = async (req, res) => {

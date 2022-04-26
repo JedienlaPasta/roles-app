@@ -5,6 +5,7 @@ export const getRoles = async (req, res) => {
     console.log(roles) //==================================
     try {
         const rolesData = await RolData.find({ ROL_AVALUO_1: roles.rol1, ROL_AVALUO_2: roles.rol2 })
+        console.log(rolesData)
         res.status(200).json(rolesData)
     } catch (error) {
         res.status(404).json({ message: error.message })
@@ -14,8 +15,19 @@ export const getRoles = async (req, res) => {
 export const getRolesByRUT = async (req, res) => {
     const rut = req.query.rut
     try {
-        const rol = await RolData.find({ RUT: rut }) // maybe set a max amount
-        res.status(200).json(rol)
+        const reg = await RolData.find({ RUT: rut }) // maybe set a max amount
+        res.status(200).json(reg)
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
+}
+
+export const getRolesByDIR = async (req, res) => {
+    const dir = req.query.dir || 'empty'
+    try {
+    const reg = await RolData.find({ DIRECCION: {$regex: dir, $options: 'i'} }).limit(5)
+    console.log(reg)
+        res.status(200).json(reg)
     } catch (error) {
         res.status(404).json({ message: error.message })
     }

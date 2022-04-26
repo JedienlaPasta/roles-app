@@ -8,11 +8,15 @@
     --clr-b2: #3273b1;
     --clr-gray: #e3e5e9;
     --clr-gray2: #d7d9dd;
+    --clr-gray3: #e6ebee;
     /* box-shadow */
     --shd-v1: 6px 8px 15px 3px rgba(100, 100, 100, 0.2);
 }
 body {
     font-size: 16px;
+    background: linear-gradient(#f0efef, #9cabdd);
+    background-attachment: fixed;
+    height: 100vh;
 }
 body, button, input {
     font-family: 'Open Sans', sans-serif;
@@ -26,6 +30,7 @@ body, button, input {
     position: relative;
     left: 50%;
     transform: translate(-50%, 50%);
+    background-color: var(--clr-gray3);
     box-shadow: var(--shd-v1);
     border-radius: 0.8rem;
 }
@@ -58,7 +63,7 @@ body, button, input {
 .login-input {
     width: 200px;
     padding: 10px 10px;
-    border: 2px solid var(--clr-gray);
+    border: 2px solid var(--clr-gray2);
     border-radius: 0.5rem;
     outline: none;
     background: none;
@@ -85,11 +90,11 @@ body, button, input {
     font-size: 0.8rem;
     font-weight: 600;
     color: #818181;
+    background-color: var(--clr-gray3);
     transition: top 200ms ease-in,
         left 200ms ease-in,
         color 200ms ease-in,
         font-size 200ms ease-in;
-    background-color: white;
     cursor: text;
 }
 .login-button {
@@ -108,7 +113,7 @@ body, button, input {
 }
 /* header ============================================================== */
 .nav-header {
-    background-color: rgb(235, 228, 228);
+    /* background-color: rgb(235, 228, 228); */
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -119,17 +124,47 @@ body, button, input {
 }
 .link {
     list-style: none;
+    display: flex;
+    align-items: center;
     margin-left: 20px;
 }
 .link-item {
     text-decoration: none;
 }
+.logout {
+    text-decoration: none;
+    font-size: 1.2em;
+    background-color: rgb(98, 142, 179);
+    display: flex;
+    padding: 10px;
+    border-radius: 5px;
+    color: rgb(224, 224, 224);
+}
 
 /* form ================================================================ */
+.filter-links {
+    display: inline-flex;
+}
+.filter-link {
+    list-style: none;
+    width: 40px;
+    padding: 1px 20px;
+    margin: 0 10px;
+    border-radius: 50px;
+    background-color: #e7eaec;
+    color: #141414;
+    text-align: center;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+.marked {
+    background-color: #3273b1;
+    color: rgb(224, 224, 224);
+}
+
 .body-container {
     width: fit-content;
     max-width: 100%;
-    min-width: 320px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -137,26 +172,29 @@ body, button, input {
     margin-top: 50px;
     padding: 30px;
     /* background-color: #f4fafc; */
+    background-color: var(--clr-gray3);
     box-shadow: var(--shd-v1);
     border-radius: 0.8rem;
 }
 .form-consulta {
-    margin-top: 15px;
-    width: fit-content;
+    margin-top: 20px;
+    width: 100%;
 }
 .inputs {
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 5px;
+    display: flex;
+    justify-content: center
 }
 .inputs > input {
     font-size: 0.9em;
-    max-width: 140px;
+    width: 100%;
     padding: 10px 10px;
-    border: 2px solid var(--clr-gray);
+    border: 2px solid var(--clr-gray2);
     border-radius: 0.5rem;
     outline: none;
     background: none;
+}
+.inputs > input:nth-of-type(even) {
+    margin-left: 8px;
 }
 .form-consulta > button {
     font-size: 0.9em;
@@ -173,16 +211,18 @@ body, button, input {
 .form-consulta > button:active {
     background-color: var(--clr-b2);
 }
-
-/* tabla =============================================================== */
-.titulo-resultado {
+.titulo-consulta {
     margin-top: 20px;
+    color: #919191;
 }
+
+/* list =============================================================== */
 table {
     border-collapse: collapse;
     font-size: 0.9em;
     text-align: center;
-    margin-top: 30px;
+    margin-top: 15px;
+    width: 100%;
 }
 td, th {
     white-space: nowrap;
@@ -195,24 +235,27 @@ th {
 td {
     border-radius: 0 50px 50px 0;
 }
-tr:nth-of-type(odd) {
+tr:nth-of-type(even) {
     background-color: #2f84a54d;
+}
+.tit {
+    background-color: #141414;
+}
+.titulo-resultado {
+    margin-top: 25px;
+    text-align: center;
+    color: #919191;
+    width: 100%;
 }
 
 @media (max-width: 500px) {
     body {
         font-size: 12px;
     }
-    .app-container {
-        padding: 25px 10px;
-    }
 }
 
 @media (max-width: 400px) {
     body {
         font-size: 10px;
-    }
-    .app-container {
-        padding: 20px 5px;
     }
 }
