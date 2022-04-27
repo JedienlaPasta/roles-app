@@ -2,6 +2,7 @@ import RolData from "../models/rolesData.js";
 
 export const getRoles = async (req, res) => {
     const roles = req.query
+    console.log('we got here')
     console.log(roles) //==================================
     try {
         const rolesData = await RolData.find({ ROL_AVALUO_1: roles.rol1, ROL_AVALUO_2: roles.rol2 })

@@ -28,22 +28,27 @@ export const userAuth = async (req, res) => {
 
     const user = await User.findOne({ name })
     if (user == null) {
+        console.log('user not found')
         return res.status(400).json({ message: 'user not found' })
     }
 
     try {
         if (await bcrypt.compare(password, user.password)) {
             const token = accessToken(user.id)
-            res.cookie('token', token, { httpOnly: true, maxAge: 30000 })
+            res.cookie('token', token, { httpOnly: true, maxAge: 30000, secure: true })
             res.json({
                 message: 'signed in successfully',
                 isAuthenticated: true,
                 user: { name: user.name, role: user.role }
             })
+            console.log('token sent')
         }
-        else res.status(401).json({ message: 'not authorized, invalid credentials' })
+        else {res.status(401).json({ message: 'not authorized, invalid credentials' })
+        console.log('token not sent')}
+        
     } catch (error) {
         res.status(400).json(error.message)
+        console.log('error sending token')
     }
 }
 
@@ -69,3 +74,5 @@ export const isAuth = async (req, res) => {
 }
 
 const accessToken = (id) => jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 30})
+
+const refreshToken = (id) => jwt.sign({ id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d'})
