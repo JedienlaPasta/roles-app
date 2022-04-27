@@ -1,16 +1,17 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { logout } from '../../actions/users'
-import { DataContext } from '../../context/DataContext'
+import { ACTIONS, DataContext } from '../../context/DataContext'
 import { RiLogoutBoxRLine } from 'react-icons/ri'
 
 export default function Navbar() {
-    const { setUser, setIsAuth } = useContext(DataContext)
+    const { setUser, setIsAuth, dispatch } = useContext(DataContext)
 
     const handleLogout = () => {
         logout().then(data => {
             setUser(data.user)
             setIsAuth(data.isAuthenticated)
+            dispatch({ type: ACTIONS.FETCH_MATCHES, payload: [] })
         })
     }
 

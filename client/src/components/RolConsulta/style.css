@@ -1,0 +1,177 @@
+
+.crud-filters {
+    width: fit-content;
+    margin: auto;
+}
+.crud-filter-links {
+    display: inline-flex;
+    justify-content: space-between;
+    width: fit-content;
+    margin: auto;
+}
+.crud-filter-link {
+    width: 180px;
+    background-color: var(--clr-gray);
+    list-style: none;
+    font-size: 0.9em;
+    font-weight: 600;
+    padding: 9px 18px;
+    border-radius: 2rem;
+    text-align: center;
+    cursor: pointer;
+}
+.crud-filter-link:not(:last-child) {
+    margin-right: 20px;
+}
+
+/* form ================================================================ */
+.filter-links {
+    display: inline-flex;
+}
+.filter-link {
+    list-style: none;
+    width: 40px;
+    padding: 1px 20px;
+    margin: 0 10px;
+    border-radius: 50px;
+    background-color: #e7eaec;
+    background-color: var(--clr-gray);
+    color: #141414;
+    text-align: center;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+.marked {
+    background-color: #3273b1;
+    color: rgb(224, 224, 224);
+}
+
+.body-container {
+    width: fit-content;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-top: 50px;
+    padding: 30px;
+    /* background-color: #f4fafc; */
+    background-color: var(--clr-gray3);
+    box-shadow: var(--shd-v1);
+    border-radius: 0.8rem;
+}
+.form-consulta {
+    margin-top: 20px;
+    width: 100%;
+}
+.inputs {
+    display: flex;
+    justify-content: center
+}
+.inputs > input {
+    font-size: 0.9em;
+    width: 100%;
+    padding: 10px 10px;
+    border: 2px solid var(--clr-gray2);
+    border-radius: 0.5rem;
+    outline: none;
+    background: none;
+}
+.inputs > input:nth-of-type(even) {
+    margin-left: 8px;
+}
+.form-consulta > button {
+    font-size: 0.9em;
+    padding: 9px 18px;
+    border-radius: 0.5rem;
+    border: 0;
+    background-color: var(--clr-b1);
+    margin-top: -100%;
+    color: white;
+    width: 100%;
+    
+    font-weight: 600;
+}
+.form-consulta > button:active {
+    background-color: var(--clr-b2);
+}
+.titulo-consulta {
+    margin-top: 20px;
+    color: #919191;
+}
+
+/* list =============================================================== */
+table {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    text-align: center;
+    margin-top: 15px;
+    width: 100%;
+}
+td, th {
+    white-space: nowrap;
+    padding: 5px 10px;
+    text-align: left;
+}
+th {
+    border-radius: 50px 0 0 50px;
+}
+td {
+    border-radius: 0 50px 50px 0;
+}
+tr:nth-of-type(even) {
+    background-color: #2f84a54d;
+}
+.tit {
+    background-color: #141414;
+}
+.titulo-resultado {
+    margin-top: 25px;
+    text-align: center;
+    color: #919191;
+    width: 100%;
+}
+
+/* insert list ========================================================= */
+th {
+    text-align: right;
+}
+td {
+    padding: 5px 5px;
+}
+.insert-list-input {
+    width: 240px;
+    border: 0;
+    padding: 5px 10px;
+    border-radius: 10px 50px 50px 10px;
+}
+
+.warning {
+    font-size: 0.75em;
+    color: #919191;
+    margin-top: 20px;
+}
+.crud-btns-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+.crud-btn {
+    font-size: 0.9em;
+    padding: 9px 18px;
+    border-radius: 0.5rem;
+    border: 0;
+    background-color: var(--clr-b1);
+    font-weight: 600;
+    color: white;
+    margin-top: 10px;
+}
+.crud-btn:not(:first-child) {
+    margin-left: 10px;
+}
+.edit {
+    background-color: #d13b20;
+}
+.delete {
+    background-color: #d13b20;
+}
