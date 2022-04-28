@@ -23,6 +23,7 @@ export const DataProvider = ({ children }) => {
     const [user, setUser] = useState({name: '', role: ''})
     const [isAuth, setIsAuth] = useState(false) // 'is the user authenticated?'
     const [isLoaded, setIsLoaded] = useState(false)
+    const [page, setPage] = useState('')
 
     useEffect(() => {
         isAuthenticated().then(data => {
@@ -41,7 +42,7 @@ export const DataProvider = ({ children }) => {
         <div>
             {
                 !isLoaded ? <h1>Loading...</h1> :
-                <DataContext.Provider value={{ roles, dispatch, user, setUser, isAuth, setIsAuth }}>
+                <DataContext.Provider value={{ roles, dispatch, user, setUser, isAuth, setIsAuth, page, setPage }}>
                     { children }
                 </DataContext.Provider>
             }

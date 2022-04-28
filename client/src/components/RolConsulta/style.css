@@ -169,9 +169,25 @@ td {
 .crud-btn:not(:first-child) {
     margin-left: 10px;
 }
-.edit {
+.delete, .edit {
     background-color: #d13b20;
 }
-.delete {
-    background-color: #d13b20;
+.list-items-btns {
+    display: flex;
+    position: relative;
+}
+.list-btn {
+    display: flex;
+    border: 0;
+    top: 20px;
+    padding: 5px;
+    font-size: 1.5em;
+    position: absolute;
+    background-color: transparent;
+}
+.btn-left {
+    left: 100px;
+}
+.btn-right {
+    right: 100px;
 }

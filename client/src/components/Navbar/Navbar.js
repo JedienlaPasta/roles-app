@@ -5,7 +5,7 @@ import { ACTIONS, DataContext } from '../../context/DataContext'
 import { RiLogoutBoxRLine } from 'react-icons/ri'
 
 export default function Navbar() {
-    const { setUser, setIsAuth, dispatch } = useContext(DataContext)
+    const { setUser, setIsAuth, dispatch, page } = useContext(DataContext)
 
     const handleLogout = () => {
         logout().then(data => {
@@ -17,7 +17,7 @@ export default function Navbar() {
 
     return (
         <header className='nav-header'>
-            <h2>ROL COBRO</h2>
+            { page === 'rolcobro' ? <h2>ROL COBRO</h2> : <h2>ROL CONSULTA</h2> }
             <nav className='nav'>
                 <ul className='nav-links'>
                     <li className='link'>

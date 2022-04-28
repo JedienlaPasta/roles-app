@@ -32,7 +32,7 @@ export default function InsertItem() {
                         <td><input type="text" className='insert-list-input' /></td>
                     </tr>
                     <tr>
-                        <th>N°/St/Pc:</th>  {/* is this field required? it contains numbers and strings */}
+                        <th>N°/St/Pc:</th>{/* is this field required? it contains numbers and strings */}
                         <td><input type="text" className='insert-list-input' /></td>
                     </tr>
                     <tr>

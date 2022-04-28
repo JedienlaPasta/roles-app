@@ -10,7 +10,7 @@ import List from './List/List'
 export default function AppBody() {
     const [filter, setFilter] = useState('ROL')
     const filters = [['ROL', <FormRol key={'rol'}/>], ['RUT', <FormRut key={'rut'}/>], ['DIR', <FormDir key={'dir'}/>]]
-    const { roles, isAuth, dispatch } = useContext(DataContext)
+    const { roles, isAuth, dispatch, setPage } = useContext(DataContext)
     const history = useNavigate()
     console.log(roles)
     
@@ -19,8 +19,11 @@ export default function AppBody() {
 
     useEffect(() => {
         if (!isAuth) return history('/auth')
-        
     }, [isAuth])
+
+    useEffect (() => {
+        setPage(() => 'rolcobro')
+    })
 
     return (
         <div className='body-container'>

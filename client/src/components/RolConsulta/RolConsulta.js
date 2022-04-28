@@ -13,7 +13,7 @@ export default function AppBody() {
     const [filter, setFilter] = useState('ROL')
     const crudFilters = ['Ingresar', 'Consultar']
     const filters = [['ROL', <FormRol key={'rol'}/>], ['RUT', <FormRut key={'rut'}/>], ['DIR', <FormDir key={'dir'}/>]]
-    const { roles, user, isAuth, dispatch } = useContext(DataContext)
+    const { roles, user, isAuth, dispatch, setPage } = useContext(DataContext)
     const history = useNavigate()
     console.log(roles)
     
@@ -25,9 +25,16 @@ export default function AppBody() {
         if (!isAuth) return history('/auth')
     }, [isAuth, crudFilter, filter])
 
+    useEffect (() => {
+        setPage('rolconsulta')
+    })
+
+    const show = user.role === 'admin'
+    console.log(show)
+
     return (
         <>
-            {   user.role === 'admin' &&
+            {   show &&
                 <div className="crud-filters">
                     <ul className='crud-filter-links'>
                         {displayCrudFilters}
