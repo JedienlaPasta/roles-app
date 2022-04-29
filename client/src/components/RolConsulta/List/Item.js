@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function Item({ COMUNA, ANO, SEMESTRE, ASEO, RUT, PROPIETARIO, DIRECCION, ROL_AVALUO_1, ROL_AVALUO_2, NA, CONTRIBUCION, AVALUO_TOTAL, AVALUO_EXENTO, TER_EXEN, UBICACION, DESTINO, index, tot }) {
-    
+
     // Para calcular el digito verificador del RUT
     const getDV = () => {
         const arr = []

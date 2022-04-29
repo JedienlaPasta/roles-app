@@ -34,7 +34,7 @@ export const userAuth = async (req, res) => {
     try {
         if (await bcrypt.compare(password, user.password)) {
             const token = accessToken(user.id)
-            res.cookie('token', token, { httpOnly: true, maxAge: 30000 })
+            res.cookie('token', token, { httpOnly: true, maxAge: 300000 })
             res.json({
                 message: 'signed in successfully',
                 isAuthenticated: true,
@@ -68,4 +68,4 @@ export const isAuth = async (req, res) => {
     res.status(200).json({ isAuthenticated: true, user: { name: user.name, role: user.role }})
 }
 
-const accessToken = (id) => jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 30})
+const accessToken = (id) => jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 300})

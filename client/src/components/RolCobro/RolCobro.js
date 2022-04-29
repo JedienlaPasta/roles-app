@@ -14,7 +14,6 @@ export default function AppBody() {
     const history = useNavigate()
     console.log(roles)
     
-    // const displayRoles = roles.map(item => <List key={item._id} />)
     const displayFilters = filters.map(item => <Filter key={item} val={item[0]} filter={filter} setFilter={setFilter} />)
 
     useEffect(() => {
@@ -34,7 +33,7 @@ export default function AppBody() {
             {
                 filters.map(item => item[0] === filter ? item[1] : null)
             }
-            { roles.length > 0 && <List /> }
+            { roles.length > 0 && <List filter={filter} /> }
         </div>
     )
 }

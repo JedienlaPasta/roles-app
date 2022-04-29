@@ -14,8 +14,8 @@ export default function App() {
         <Route path="/*" element={ <PrivateRoute /> }>
           <Route path="/*" element={ [<Navbar key='navApp'/>, <RolCobro key='rolbody' />] }/>
         </Route>
-        <Route path="/rol2/*" element={ <PrivateRoute /> }>
-          <Route path="/rol2/*" element={ [<Navbar key='navApp'/>, <RolConsulta key='rol2body' />] }/>
+        <Route path="/permisos/*" element={ <PrivateRoute /> }>
+          <Route path="/permisos/*" element={ [<Navbar key='navApp'/>, <RolConsulta key='rol2body' />] }/>
         </Route>
         <Route exact path='/auth/*' element={ <Auth key='auth' /> }/>
       </Routes>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { logout } from '../../actions/users'
 import { ACTIONS, DataContext } from '../../context/DataContext'
@@ -17,11 +17,14 @@ export default function Navbar() {
 
     return (
         <header className='nav-header'>
-            { page === 'rolcobro' ? <h2>ROL COBRO</h2> : <h2>ROL CONSULTA</h2> }
+            { page === 'rolcobro' ? <h2>ROL COBRO</h2> : <h2>PERMISOS DOM</h2> }
             <nav className='nav'>
                 <ul className='nav-links'>
                     <li className='link'>
-                        <Link className='link-item' to='/rol2'>rol2</Link>
+                        <Link className='link-item' to='/'>Rol_Cobro</Link>
+                    </li>
+                    <li className='link'>
+                        <Link className='link-item' to='/permisos'>Permisos</Link>
                     </li>
                     <li className='link'>
                         <Link className='link-item logout' to='/auth' onClick={handleLogout}><RiLogoutBoxRLine/></Link>

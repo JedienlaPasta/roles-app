@@ -39,7 +39,6 @@ export default function Item({ COMUNA, ANO, SEMESTRE, ASEO, RUT, PROPIETARIO, DI
     
     return (
         <>
-            { tot > 1 && <h4 className='titulo-resultado'>Resultado #{index + 1}</h4>}
             <table className='list-container'>
                 <tbody>
                     <tr>

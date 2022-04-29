@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 
 import rolesRoutes from './routes/roles.js'
+import permisosRoutes from './routes/permisos.js'
 import userRoutes from './routes/user.js'
 
 const app = express()
@@ -16,6 +17,7 @@ app.use(cookieParser())
 app.use(cors())
 
 app.use('/roles', rolesRoutes)
+app.use('/permisos', permisosRoutes)
 app.use('/users', userRoutes)
 
 app.get('/', (req, res) => {

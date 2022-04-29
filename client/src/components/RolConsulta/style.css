@@ -42,7 +42,7 @@
     cursor: pointer;
 }
 .marked {
-    background-color: #3273b1;
+    background-color: var(--clr-b2);
     color: rgb(224, 224, 224);
 }
 
@@ -56,7 +56,6 @@
     margin-bottom: 30px;
     margin-top: 50px;
     padding: 30px;
-    /* background-color: #f4fafc; */
     background-color: var(--clr-gray3);
     box-shadow: var(--shd-v1);
     border-radius: 0.8rem;
@@ -86,7 +85,7 @@
     padding: 9px 18px;
     border-radius: 0.5rem;
     border: 0;
-    background-color: var(--clr-b1);
+    background-color: var(--clr-b2);
     margin-top: -100%;
     color: white;
     width: 100%;
@@ -94,7 +93,7 @@
     font-weight: 600;
 }
 .form-consulta > button:active {
-    background-color: var(--clr-b2);
+    background-color: var(--clr-b1);
 }
 .titulo-consulta {
     margin-top: 20px;
@@ -145,6 +144,7 @@ tr:nth-of-type(even) {
     border: 0;
     padding: 5px 10px;
     border-radius: 10px 50px 50px 10px;
+    outline: none;
 }
 
 .warning {
@@ -171,7 +171,16 @@ tr:nth-of-type(even) {
     margin-left: 10px;
 }
 .delete, .edit {
-    background-color: #d13b20;
+    background-color: var(--clr-red);
+}
+.save, .cancel {
+    margin-top: 25px;
+}
+.save {
+    background-color: var(--clr-red);
+}
+.cancel {
+    background-color: var(--clr-b2);
 }
 .list-items-btns {
     display: flex;
