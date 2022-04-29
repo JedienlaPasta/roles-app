@@ -1,12 +1,13 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaUserAstronaut } from 'react-icons/fa'
 import { DataContext } from '../../context/DataContext'
 import { login } from '../../actions/users' 
+import Message from './Message'
 
 export default function Auth() {
     const [authUser, setAuthUser] = useState({name: '', password: ''})
-    const [message, setMessage] = useState(null) // or maybe ''
+    const [Amessage, setMessage] = useState(null) // or maybe ''
     // const { user, setUser, isAuth } = useContext(DataContext)
     const Context = useContext(DataContext)
 
@@ -15,14 +16,20 @@ export default function Auth() {
     const handleLogin = (event) => {
         event.preventDefault()
         login(authUser, setAuthUser).then(data => {
-            const { isAuthenticated, message, role } = data
+            const { isAuthenticated, message, user } = data
+            console.log(data)
             if (isAuthenticated) {
-                Context.setUser(data.user)
+                Context.setUser(user)
                 Context.setIsAuth(isAuthenticated)
+                setMessage(message)
                 history('/')
             }
         })
     }
+
+    useEffect(() => {
+        console.log(Amessage)
+    }, [Amessage])
 
     return (
         <div className='login-container'>
@@ -41,7 +48,7 @@ export default function Auth() {
                 </div>
                 <button className='login-button'>Iniciar Sesión</button>
             </form>
-            {/* { message && <Message message={message} /> } */}
+            { Amessage && <Message message={Amessage} /> }
         </div>
     )
 }

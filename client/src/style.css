@@ -16,7 +16,7 @@ body {
     font-size: 16px;
     background: linear-gradient(#f0efef, #b7d0e2);
     background-attachment: fixed;
-    height: 100vh;
+    min-height: 100vh;
 }
 body, button, input {
     font-family: 'Open Sans', sans-serif;

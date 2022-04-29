@@ -5,7 +5,7 @@ export const login = async (user) => {
         const { data } = await userAuth(user)
         return data
     } catch (error) {
-        console.log(error.message)
+        console.log(error)
     }
 }
 
@@ -24,6 +24,6 @@ export const isAuthenticated = async () => {
         const { data } = await isUserAuth()
         return data
     } catch (error) {
-        return { isAuthenticated: false, user: { name: '', role:'' }}
+        return { isAuthenticated: false, user: { name: '', role: '' }}
     }
 }

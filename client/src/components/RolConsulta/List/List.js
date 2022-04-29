@@ -1,16 +1,34 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { DataContext } from '../../../context/DataContext'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 import InsertItem from './InsertItem'
 import Item from './Item'
 
-export default function List({ type }) {
-    const [rolIndex, setRolIndex] = useContext(0)
+export default function List({ type, filter }) {
+    const [rolIndex, setRolIndex] = useState(0)
     const { roles, user } = useContext(DataContext)
     const totRoles = roles.length
 
-    const displayItems = type === 'insert' ? <InsertItem /> : roles.map((rol, index) => <Item key={rol._id} {...rol} index={index} tot={totRoles} />)
-                                                            // show rol according to index state
+    const displayItems = type === 'insert' ? <InsertItem /> : roles.map((rol, index) => (
+        index === rolIndex ?
+        <Item key={rol._id} {...rol} index={index} tot={totRoles} /> :
+        null
+    ))
+
+    const goForward = () => {
+        setRolIndex(prev => {
+            if (prev === 4) return 0
+            return prev + 1
+        })
+    }
+
+    const goBackwards = () => {
+        setRolIndex(prev => {
+            if (prev === 0) return 4
+            return prev - 1
+        })
+    }
+
     return (
         <>
             {   user.role === 'admin' && type !== 'insert' &&
@@ -23,10 +41,19 @@ export default function List({ type }) {
                 </div>
             }
             <div className="list-items">
-                <div className="list-items-btns">
-                    <button className="list-btn btn-left"><FiChevronsLeft/></button>
-                    <button className="list-btn btn-right"><FiChevronsRight/></button>
-                </div>
+                {   filter === 'DIR' &&
+                    <div className="list-items-btns">
+                        <button className="list-btn btn-left" onClick={goBackwards}><FiChevronsLeft/></button>
+                        <button className="list-btn btn-right" onClick={goForward}><FiChevronsRight/></button>
+                    </div>
+                }
+                { filter === 'DIR' && totRoles > 1 && 
+                    <div className="list-items-btns">
+                        <h4 className='titulo-resultado'>Resultado #{rolIndex + 1}</h4>
+                        <button className="list-btn btn-left" onClick={goBackwards}><FiChevronsLeft/></button>
+                        <button className="list-btn btn-right" onClick={goForward}><FiChevronsRight/></button>
+                    </div>
+                }
                 {displayItems}
             </div>
         </>

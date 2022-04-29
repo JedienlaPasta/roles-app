@@ -23,7 +23,6 @@ export const register = async (req, res) => {
 }
 
 export const userAuth = async (req, res) => {
-
     const { name, password } = req.body.user
     console.log(req.body)
 
@@ -44,7 +43,7 @@ export const userAuth = async (req, res) => {
         }
         else res.status(401).json({ message: 'not authorized, invalid credentials' })
     } catch (error) {
-        res.status(400).json(error.message)
+        res.status(400).json({ message: error.message })
     }
 }
 

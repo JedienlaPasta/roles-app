@@ -48,10 +48,10 @@ export default function AppBody() {
                             {displayFilters}
                         </ul>
                         <h4 className='titulo-consulta'>Haga su consulta</h4>
-                        {
+                        {   // aqui se define que formulario de renderiza, dependiendo de la opcion elegida: ['ROL', 'RUT', 'DIR']
                             filters.map(item => item[0] === filter ? item[1] : null)
                         }
-                        { roles.length > 0 && <List /> }
+                        { roles.length > 0 && <List filter={filter} /> }
                     </>)
                     :
                     (<>

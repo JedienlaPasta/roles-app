@@ -53,6 +53,7 @@
     flex-direction: column;
     align-items: center;
     margin: auto;
+    margin-bottom: 30px;
     margin-top: 50px;
     padding: 30px;
     /* background-color: #f4fafc; */
@@ -133,10 +134,10 @@ tr:nth-of-type(even) {
 }
 
 /* insert list ========================================================= */
-th {
+.text-right {
     text-align: right;
 }
-td {
+.insert-list-input-row {
     padding: 5px 5px;
 }
 .insert-list-input {
@@ -175,6 +176,8 @@ td {
 .list-items-btns {
     display: flex;
     position: relative;
+    width: 200px;
+    margin: auto;
 }
 .list-btn {
     display: flex;
@@ -186,8 +189,8 @@ td {
     background-color: transparent;
 }
 .btn-left {
-    left: 100px;
+    left: 0;
 }
 .btn-right {
-    right: 100px;
+    right: 0;
 }
