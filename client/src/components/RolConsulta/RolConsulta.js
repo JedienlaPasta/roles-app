@@ -7,10 +7,11 @@ import FormRut from './Form/FormRut'
 import FormDir from './Form/FormDir'
 import List from './List/List'
 import './style.css'
+import Popup from './Popup'
 
 export default function AppBody() {
     const [crudFilter, setCrudFilter] = useState({ crudType: 'Consultar', filter: 'ROL', type: 'read', filters: ['Ingresar', 'Consultar']})
-    const [filter, setFilter] = useState('ROL')
+    const [showPopup, setShowPopup] = useState(false)
     const filters = [['ROL', <FormRol key={'rol'}/>], ['RUT', <FormRut key={'rut'}/>], ['DIR', <FormDir key={'dir'}/>]]
     const { roles, user, isAuth, dispatch, setPage } = useContext(DataContext)
     const history = useNavigate()
@@ -24,7 +25,7 @@ export default function AppBody() {
     useEffect(() => {
         dispatch({ type: ACTIONS.FETCH_MATCHES, payload: [] })
         if (!isAuth) return history('/auth')
-    }, [isAuth, crudFilter.crudType, filter])
+    }, [isAuth, crudFilter.crudType])
 
     useEffect (() => {
         setPage('rolconsulta')
@@ -32,6 +33,7 @@ export default function AppBody() {
 
     return (
         <>
+            { showPopup && <Popup setShowPopup={setShowPopup} /> }
             {   user.role === 'admin' &&
                 <div className="crud-filters">
                     <ul className='crud-filter-links'>
@@ -49,15 +51,15 @@ export default function AppBody() {
                         {   // aqui se define que formulario de renderiza, dependiendo de la opcion elegida: ['ROL', 'RUT', 'DIR']
                             filters.map(item => item[0] === crudFilter.filter ? item[1] : null)
                         }
-                        { roles.length > 0 && <List crudFilter={crudFilter} setCrudFilter={setCrudFilter} /> }
+                        { roles.length > 0 && <List crudFilter={crudFilter} setCrudFilter={setCrudFilter} setShowPopup={setShowPopup} /> }
                     </>)
                     :
                     (<>
-                        <List crudFilter={crudFilter} /> 
-                        {/* <List type='update' /> for updating fields */}
+                        <List crudFilter={crudFilter} setCrudFilter={setCrudFilter} setShowPopup={setShowPopup} />
                     </>)
                 }
             </div>
+            <button onClick={() => setShowPopup(prev => !prev)}>popup</button>
         </>
     )
 }

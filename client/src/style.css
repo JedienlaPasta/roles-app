@@ -130,10 +130,13 @@ button {
     list-style: none;
     display: flex;
     align-items: center;
-    margin-left: 20px;
+    margin-left: 25px;
+    font-size: 0.75em;
+    font-weight: 600;
 }
 .link-item {
     text-decoration: none;
+    color: #133274;
 }
 .logout {
     text-decoration: none;
@@ -143,6 +146,12 @@ button {
     padding: 10px;
     border-radius: 8px;
     color: rgb(112, 112, 112);
+    transition: background-color ease-in 200ms,
+                color ease-in 200ms;
+}
+.logout:hover {
+    background-color: #133274;
+    color: white;
 }
 
 @media (max-width: 500px) {

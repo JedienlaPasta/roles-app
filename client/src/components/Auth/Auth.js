@@ -7,7 +7,7 @@ import Message from './Message'
 
 export default function Auth() {
     const [authUser, setAuthUser] = useState({name: '', password: ''})
-    const [Amessage, setMessage] = useState(null) // or maybe ''
+    // const [message, setMessage] = useState(null) // or maybe ''
     // const { user, setUser, isAuth } = useContext(DataContext)
     const Context = useContext(DataContext)
 
@@ -21,15 +21,10 @@ export default function Auth() {
             if (isAuthenticated) {
                 Context.setUser(user)
                 Context.setIsAuth(isAuthenticated)
-                setMessage(message)
                 history('/')
             }
         })
     }
-
-    useEffect(() => {
-        console.log(Amessage)
-    }, [Amessage])
 
     return (
         <div className='login-container'>
@@ -48,7 +43,7 @@ export default function Auth() {
                 </div>
                 <button className='login-button'>Iniciar Sesión</button>
             </form>
-            { Amessage && <Message message={Amessage} /> }
+            {/* { message && <Message message={message} /> } */}
         </div>
     )
 }

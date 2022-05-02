@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { getRoles, getRolesByDIR } from '../../../actions/roles'
+import { getPermisosByDIR } from '../../../actions/permisos'
 import { isAuthenticated } from '../../../actions/users'
 import { DataContext } from '../../../context/DataContext'
 
@@ -15,7 +15,7 @@ export default function FormRut() {
             setUser(user)
             setIsAuth(isAuthenticated)
             if (isAuthenticated) {
-                getRolesByDIR(dir, dispatch)
+                getPermisosByDIR(dir, dispatch)
             }
         })
     }

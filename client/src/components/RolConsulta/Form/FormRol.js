@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react'
-import { getRoles } from '../../../actions/roles'
+import { getPermisos } from '../../../actions/permisos'
 import { isAuthenticated } from '../../../actions/users'
 import { DataContext } from '../../../context/DataContext'
 
 export default function FormRol() {
     const [rol, setRol] = useState({ 
-        rol1: '', 
-        rol2: '' 
+        matriz: '', 
+        digito: '' 
     })
 
     const { dispatch, setUser, setIsAuth } = useContext(DataContext)
@@ -18,7 +18,7 @@ export default function FormRol() {
             setUser(user)
             setIsAuth(isAuthenticated)
             if (isAuthenticated) {
-                getRoles(rol, dispatch)
+                getPermisos(rol, dispatch)
             }
         })
     }
@@ -26,8 +26,8 @@ export default function FormRol() {
     return (
         <form className='form-consulta' onSubmit={handleSubmit}>
             <span className='inputs'>
-            <input type='number' name='rol_1' required placeholder='Ingresar MZ...' value={rol.rol1} onChange={(e) => setRol(item => ({...item, rol1: e.target.value}))} />
-            <input type='number' name='rol_2' required placeholder='Ingresar PD...' value={rol.rol2} onChange={(e) => setRol(item => ({...item, rol2: e.target.value}))} />
+            <input type='number' name='rol_1' required placeholder='Ingresar MZ...' value={rol.matriz} onChange={(e) => setRol(item => ({...item, matriz: e.target.value}))} />
+            <input type='number' name='rol_2' required placeholder='Ingresar PD...' value={rol.digito} onChange={(e) => setRol(item => ({...item, digito: e.target.value}))} />
             </span>
             <br />
             <button type='submit'>Buscar</button>

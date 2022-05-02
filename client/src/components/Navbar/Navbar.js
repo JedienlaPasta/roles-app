@@ -21,10 +21,10 @@ export default function Navbar() {
             <nav className='nav'>
                 <ul className='nav-links'>
                     <li className='link'>
-                        <Link className='link-item' to='/'>Rol_Cobro</Link>
+                        <Link className='link-item' to='/'>ROL_COBRO</Link>
                     </li>
                     <li className='link'>
-                        <Link className='link-item' to='/permisos'>Permisos</Link>
+                        <Link className='link-item' to='/permisos'>PERMISOS</Link>
                     </li>
                     <li className='link'>
                         <Link className='link-item logout' to='/auth' onClick={handleLogout}><RiLogoutBoxRLine/></Link>

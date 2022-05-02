@@ -1,5 +1,14 @@
 import axios from 'axios'
 
+// Usuarios
+// const users_url = 'http://localhost:5000/users/login'
+
+export const userAuth = (user) => axios.post('/users/login', { user })
+
+export const clearUser = () => axios.get('/users/logout')
+
+export const isUserAuth = () => axios.get('/users/auth')
+
 // Roles
 // const roles_url = 'http://localhost:5000/roles'
 // const url = 'https://rol-cobro.herokuapp.com/roles'
@@ -10,11 +19,17 @@ export const fetchRolesByRUT = (rut) => axios.get('/roles/rut', { params: rut })
 
 export const fetchRolesByDIR = (dir) => axios.get('/roles/dir', { params: dir })
 
-// Usuarios
-// const users_url = 'http://localhost:5000/users/login'
+// Permisos
+// const permisos_url = 'https://localhost:5000/permisos'
 
-export const userAuth = (user) => axios.post('/users/login', { user })
+export const fetchPermisos = (rol) => axios.get('/permisos/rol', { params: rol })
 
-export const clearUser = () => axios.get('/users/logout')
+export const fetchPermisosByRUT = (rut) => axios.get('/permisos/rut', { params: rut })
 
-export const isUserAuth = () => axios.get('/users/auth')
+export const fetchPermisosByDIR = (dir) => axios.get('/permisos/dir', { params: dir })
+
+export const createPermiso = (permiso) => axios.post('permisos/create', { permiso })
+
+export const updatePermiso = (permiso) => axios.patch('/permisos/update', { permiso })
+
+export const deletePermiso = (id) => axios.delete('/permisos/delete', { id })
