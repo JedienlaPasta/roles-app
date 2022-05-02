@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { DataContext } from '../../context/DataContext'
+import { ACTIONS, DataContext } from '../../context/DataContext'
 import Filter from './Filter/Filter'
 import FormRol from './Form/FormRol'
 import FormRut from './Form/FormRut'
@@ -17,6 +17,7 @@ export default function AppBody() {
     const displayFilters = filters.map(item => <Filter key={item} val={item[0]} filter={filter} setFilter={setFilter} />)
 
     useEffect(() => {
+        dispatch({ type: ACTIONS.FETCH_MATCHES, payload: [] })
         if (!isAuth) return history('/auth')
     }, [isAuth])
 

@@ -1,41 +1,6 @@
 import React from 'react'
 
-export default function Item({ COMUNA, ANO, SEMESTRE, ASEO, RUT, PROPIETARIO, DIRECCION, ROL_AVALUO_1, ROL_AVALUO_2, NA, CONTRIBUCION, AVALUO_TOTAL, AVALUO_EXENTO, TER_EXEN, UBICACION, DESTINO, index, tot }) {
-
-    // Para calcular el digito verificador del RUT
-    const getDV = () => {
-        const arr = []
-        const mArr = [2, 3, 4, 5, 6, 7]
-        if ( RUT !== 0) {
-            const inverted = RUT.toString().split("").reverse().join("")
-            for (let i = 0; i < inverted.length; i++) {
-                arr[i] = inverted.charAt(i)
-                if(i < mArr.length) {
-                    arr[i] = arr[i] * mArr[i]
-                }
-                else {
-                    let n = i - mArr.length
-                    arr[i] = arr[i] * mArr[n]
-                }
-            }
-        }
-        const firstTot = arr.reduce((prev, curr) => prev + curr, 0)
-        const secondTot = firstTot - Math.floor(firstTot / 11) * 11
-        let dv = (11 - secondTot).toString()
-        if (dv > 9) {
-            if (dv === '11') {
-                return dv = '0'
-            }
-            return dv = 'k'
-        }
-        return dv
-    }
-
-    const dv = getDV()
-
-    const currencyFormat = (val) => {
-        return "$" + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-    }
+export default function Item({ MATRIZ, DIGITO, NOMBRE, APELLIDO_P, APELLIDO_M, MZ, NSTPC, CALLE, SECTOR, N_VIV, M2_C_RECEP, M2_C_PERM, M2_S_PERM, M2_TOTAL, ESTADO, index, tot }) {
     
     return (
         <>
@@ -43,64 +8,64 @@ export default function Item({ COMUNA, ANO, SEMESTRE, ASEO, RUT, PROPIETARIO, DI
             <table className='list-container'>
                 <tbody>
                     <tr>
-                        <th>COMUNA:</th>
-                        <td>{COMUNA}</td>
+                        <th>MATRIZ:</th>
+                        <td>{MATRIZ}</td>
                     </tr>
                     <tr>
-                        <th>AÑO:</th>
-                        <td>{ANO}</td>
+                        <th>DIGITO:</th>
+                        <td>{DIGITO}</td>
                     </tr>
                     <tr>
-                        <th>SEMSTRE:</th>
-                        <td>{SEMESTRE}</td>
+                        <th>NOMBRE:</th>
+                        <td>{NOMBRE}</td>
                     </tr>
                     <tr>
-                        <th>ASEO:</th>
-                        <td>{ASEO}</td>
+                        <th>APELLIDO_P:</th>
+                        <td>{APELLIDO_P}</td>
                     </tr>
                     <tr>
-                        <th>RUT:</th>
-                        <td>{RUT + '-' + dv}</td>
+                        <th>APELLIDO_M:</th>
+                        <td>{APELLIDO_M}</td>
                     </tr>
                     <tr>
-                        <th>PROPIETARIO:</th>
-                        <td>{PROPIETARIO}</td>
+                        <th>MZ:</th>
+                        <td>{MZ}</td>
                     </tr>
                     <tr>
-                        <th>DIRECCIÓN:</th>
-                        <td>{DIRECCION}</td>
+                        <th>NSTPC:</th>
+                        <td>{NSTPC}</td>
                     </tr>
                     <tr>
-                        <th>ROL AVALÚO:</th>
-                        <td>{ROL_AVALUO_1 + ' - ' + ROL_AVALUO_2}</td>
+                        <th>CALLE:</th>
+                        <td>{CALLE}</td>
                     </tr>
                     <tr>
-                        <th>N/A:</th>
-                        <td>{NA}</td>
+                        <th>SECTOR:</th>
+                        <td>{SECTOR}</td>
                     </tr>
                     <tr>
-                        <th>CONTRIBUCIÓN:</th>
-                        <td>{currencyFormat(CONTRIBUCION)}</td>
+                        <th>N_VIV:</th>
+                        <td>{N_VIV}</td>
                     </tr>
                     <tr>
-                        <th>AVALÚO TOTAL:</th>
-                        <td>{currencyFormat(AVALUO_TOTAL)}</td>
+                        <th>M2_C_RECEP:</th>
+                        <td>{M2_C_RECEP}</td>
                     </tr>
                     <tr>
-                        <th>AVALÚO EXENTO:</th>
-                        <td>{currencyFormat(AVALUO_EXENTO)}</td>
+                        <th>M2_C_PERM:</th>
+                        <td>{M2_C_PERM}</td>
                     </tr>
                     <tr>
-                        <th>TER.EXEN:</th>
-                        <td>{currencyFormat(TER_EXEN)}</td>
+                        <th>M2_S_PERM:</th>
+                        <td>{M2_S_PERM}</td>
                     </tr>
                     <tr>
-                        <th>DESTINO:</th>
-                        <td>{UBICACION}</td>
+                        <th>M2_TOTAL:</th>
+                        <td>{M2_TOTAL}</td>
                     </tr>
                     <tr>
-                        <th>UBICACIÓN:</th>
-                        <td>{DESTINO}</td>
+                        <th>ESTADO:</th>
+                        <td>{ESTADO}</td>
                     </tr>
                 </tbody>
             </table>

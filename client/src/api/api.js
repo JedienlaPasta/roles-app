@@ -26,7 +26,7 @@ export const fetchPermisos = (rol) => axios.get('/permisos/rol', { params: rol }
 
 export const fetchPermisosByRUT = (rut) => axios.get('/permisos/rut', { params: rut })
 
-export const fetchPermisosByDIR = (dir) => axios.get('/permisos/dir', { params: dir })
+export const fetchPermisosByDIR = (dir) => axios.get('/permisos/dir', { params: {dir:dir} })
 
 export const createPermiso = (permiso) => axios.post('permisos/create', { permiso })
 

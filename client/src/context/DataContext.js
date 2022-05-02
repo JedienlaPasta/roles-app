@@ -23,6 +23,7 @@ export const DataProvider = ({ children }) => {
     const [user, setUser] = useState({name: '', role: ''})
     const [isAuth, setIsAuth] = useState(false) // 'is the user authenticated?'
     const [isLoaded, setIsLoaded] = useState(false)
+    const [message, setMessage] = useState('')
     const [page, setPage] = useState('')
 
     useEffect(() => {

@@ -3,7 +3,7 @@ import { ACTIONS, DataContext } from '../../../context/DataContext'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 import InsertItem from './InsertItem'
 import Item from './Item'
-import { postPermiso } from '../../../actions/permisos'
+import { patchPermiso, postPermiso } from '../../../actions/permisos'
 
 export default function List({ crudFilter, setCrudFilter, setShowPopup }) {
     const [rolIndex, setRolIndex] = useState(0)
@@ -32,7 +32,7 @@ export default function List({ crudFilter, setCrudFilter, setShowPopup }) {
 
     let displayItems
     if (type === 'insert') { displayItems = <InsertItem type={type} newPermiso={newPermiso} setNewPermiso={setNewPermiso} /> }
-    else if (type === 'update') { displayItems = roles.map((rol) => <InsertItem type={type} data={rol} key={rol._id} />) }
+    else if (type === 'update') { displayItems = roles.map((rol) => <InsertItem type={type} newPermiso={newPermiso} setNewPermiso={setNewPermiso} data={rol} key={rol._id} />) }
     else {
         displayItems = roles.map((rol, index) => ( index === rolIndex ?
             <Item key={rol._id} {...rol} index={index} tot={totRoles} /> : null
@@ -55,29 +55,34 @@ export default function List({ crudFilter, setCrudFilter, setShowPopup }) {
         })
     }
 
-    const deleteRol = () => {
+    const deletePermiso = () => {
 
     }
 
-    const editRol = () => {
+    const editPermiso = () => {
         dispatch({ type: ACTIONS.FETCH_MATCHES, payload: [roles[rolIndex]] })
         if (crudFilter) {
             setCrudFilter({...crudFilter, type: 'update'})
         }
     }
 
-    // if (crudFilter) {console.log(crudFilter.type)}
+    if (crudFilter) { console.log(crudFilter.type)}
 
     const savePermiso = (event) => {
         event.preventDefault()
-        // filtra al 'newPermiso' y saca el campo 'MZ'
+        // filtra al 'newPermiso' sacando el campo 'MZ'
         const permisoToCheck = Object.fromEntries(Object.entries(newPermiso).filter(([key]) => key !== 'MZ'))
         // reviza si todos los campos del nuevo objeto son distintos de ''
         const isValid = Object.values(permisoToCheck).every(field => {
             if (field === '') return false
             else return true
         })
-        postPermiso(newPermiso)
+        if (type === 'insert') {
+            postPermiso(newPermiso)
+        }
+        if (type === 'update') {
+            patchPermiso(newPermiso)
+        }
         // Se vacia el formulario una vez ingresado el permiso
         setNewPermiso({ MATRIZ: '', DIGITO: '', NOMBRE: '', APELLIDO_P: '', APELLIDO_M: '', MZ: '', NSTPC: '', CALLE: '', SECTOR: '', N_VIV: '', M2_C_RECEP: '', M2_C_PERM: '', M2_S_PERM: '', M2_TOTAL: '', ESTADO: '' })
         setShowPopup(true)
@@ -99,7 +104,7 @@ export default function List({ crudFilter, setCrudFilter, setShowPopup }) {
                     <p className='warning'>Cuidado, usted tiene permisos para editar y eliminar registros</p>
                     <div className="crud-btns-container">
                         <button className='crud-btn delete'>Eliminar</button>
-                        <button className='crud-btn edit' onClick={editRol}>Editar</button>
+                        <button className='crud-btn edit' onClick={editPermiso}>Editar</button>
                     </div>
                 </div>
             }
@@ -123,7 +128,7 @@ export default function List({ crudFilter, setCrudFilter, setShowPopup }) {
             {
                 type === 'update' &&
                 <div className="crud-btns-container">
-                    <button className='crud-btn save'>Guardar</button>
+                    <button className='crud-btn save' onClick={savePermiso}>Guardar</button>
                     <button className='crud-btn cancel'>Cancelar</button>
                 </div>
             }
