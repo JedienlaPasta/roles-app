@@ -5,29 +5,12 @@ import InsertItem from './InsertItem'
 import Item from './Item'
 import { patchPermiso, postPermiso } from '../../../actions/permisos'
 
-export default function List({ crudFilter, setCrudFilter, setShowPopup }) {
+export default function List({ crudFilter, setCrudFilter, save }) {
     const [rolIndex, setRolIndex] = useState(0)
-    const { roles, user, dispatch } = useContext(DataContext)
+    const { roles, dispatch, newPermiso, setNewPermiso, user, setMessage } = useContext(DataContext)
     const totRoles = roles.length
     const type = crudFilter.type
-    const [newPermiso, setNewPermiso] = useState({  
-        MATRIZ: roles[0]?.MATRIZ || '',
-        DIGITO: roles[0]?.DIGITO || '',
-        NOMBRE: roles[0]?.NOMBRE || '',
-        APELLIDO_P: roles[0]?.APELLIDO_P || '',
-        APELLIDO_M: roles[0]?.APELLIDO_M || '',
-        MZ: roles[0]?.MZ || '',
-        NSTPC: roles[0]?.NSTPC || '',
-        CALLE: roles[0]?.CALLE || '',
-        SECTOR: roles[0]?.SECTOR || '',
-        N_VIV: roles[0]?.N_VIV || '',
-        M2_C_RECEP: roles[0]?.M2_C_RECEP || '',
-        M2_C_PERM: roles[0]?.M2_C_PERM || '',
-        M2_S_PERM: roles[0]?.M2_S_PERM || '',
-        M2_TOTAL: roles[0]?.M2_TOTAL || '',
-        ESTADO: roles[0]?.ESTADO || ''
-    })
-
+    
     // Displayed items
 
     let displayItems
@@ -66,28 +49,6 @@ export default function List({ crudFilter, setCrudFilter, setShowPopup }) {
         }
     }
 
-    if (crudFilter) { console.log(crudFilter.type)}
-
-    const savePermiso = (event) => {
-        event.preventDefault()
-        // filtra al 'newPermiso' sacando el campo 'MZ'
-        const permisoToCheck = Object.fromEntries(Object.entries(newPermiso).filter(([key]) => key !== 'MZ'))
-        // reviza si todos los campos del nuevo objeto son distintos de ''
-        const isValid = Object.values(permisoToCheck).every(field => {
-            if (field === '') return false
-            else return true
-        })
-        if (type === 'insert') {
-            postPermiso(newPermiso)
-        }
-        if (type === 'update') {
-            patchPermiso(newPermiso)
-        }
-        // Se vacia el formulario una vez ingresado el permiso
-        setNewPermiso({ MATRIZ: '', DIGITO: '', NOMBRE: '', APELLIDO_P: '', APELLIDO_M: '', MZ: '', NSTPC: '', CALLE: '', SECTOR: '', N_VIV: '', M2_C_RECEP: '', M2_C_PERM: '', M2_S_PERM: '', M2_TOTAL: '', ESTADO: '' })
-        setShowPopup(true)
-    }
-
     const cancel = (event) => {
         event.preventDefault()
         console.log('cancel')
@@ -121,15 +82,15 @@ export default function List({ crudFilter, setCrudFilter, setShowPopup }) {
             {
                 type === 'insert' &&
                 <div className="crud-btns-container">
-                    <button className='crud-btn save' onClick={savePermiso}>Guardar</button>
+                    <button className='crud-btn save' onClick={save}>Guardar</button>
                     <button className='crud-btn cancel' onClick={cancel}>Cancelar</button>
                 </div>
             }
             {
                 type === 'update' &&
                 <div className="crud-btns-container">
-                    <button className='crud-btn save' onClick={savePermiso}>Guardar</button>
-                    <button className='crud-btn cancel'>Cancelar</button>
+                    <button className='crud-btn save' onClick={save}>Guardar</button>
+                    <button className='crud-btn cancel' onClick={cancel}>Cancelar</button>
                 </div>
             }
         </form>

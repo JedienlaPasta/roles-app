@@ -30,9 +30,10 @@ export const getPermisosByDIR = async (dir, dispatch, setMessage) => {
     }
 }
 
-export const postPermiso = async (permiso) => {
+export const postPermiso = async (permiso, setMessage) => {
     try {
-        await createPermiso(permiso)
+        const { data } = await createPermiso(permiso)
+        setMessage(data.message)
     } catch (error) {
         if (error.response) {
             // setMessage(error.response.data.message)
@@ -41,9 +42,10 @@ export const postPermiso = async (permiso) => {
     }
 }
 
-export const patchPermiso = async (permiso) => {
+export const patchPermiso = async (permiso, setMessage) => {
     try {
-        await updatePermiso(permiso)
+        const { data } = await updatePermiso(permiso)
+        setMessage(data.message)
     } catch (error) {
         if (error.response) {
             console.log(error.response.data)

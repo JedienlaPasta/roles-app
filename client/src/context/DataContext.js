@@ -25,6 +25,8 @@ export const DataProvider = ({ children }) => {
     const [isLoaded, setIsLoaded] = useState(false)
     const [message, setMessage] = useState('')
     const [page, setPage] = useState('')
+    const [showPopup, setShowPopup] = useState(false)
+    const [newPermiso, setNewPermiso] = useState({ MATRIZ: '', DIGITO: '', NOMBRE: '', APELLIDO_P: '', APELLIDO_M: '', MZ: '', NSTPC: '', CALLE: '', SECTOR: '', N_VIV: '', M2_C_RECEP: '', M2_C_PERM: '', M2_S_PERM: '', M2_TOTAL: '', ESTADO: '' })
 
     useEffect(() => {
         isAuthenticated().then(data => {
@@ -39,11 +41,22 @@ export const DataProvider = ({ children }) => {
         console.log(user)
     }, [isAuth, user])
 
+    useEffect(() => {
+        // se asignan los valores en roles a newPermiso, cada vez que estos se cambian
+        Object.keys(newPermiso).forEach(key => newPermiso[key] = roles[0]?.[key] || '')
+    }, [roles])
+
+    useEffect(() => {
+        if (message !== '') {
+            setShowPopup(true)
+        }
+    }, [message])
+
     return (
         <div>
             {
                 !isLoaded ? <h1>Loading...</h1> :
-                <DataContext.Provider value={{ roles, dispatch, user, setUser, isAuth, setIsAuth, page, setPage }}>
+                <DataContext.Provider value={{ roles, dispatch, user, setUser, isAuth, setIsAuth, page, setPage, message, setMessage, newPermiso, setNewPermiso,showPopup, setShowPopup }}>
                     { children }
                 </DataContext.Provider>
             }

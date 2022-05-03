@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 export default function InsertItem({ type, newPermiso, setNewPermiso }) {
     const title = type === 'insert' ? 'Nuevo Registro' : 'Actualizar Registro'
+    const name = type === 'update' ? 'insert-list-input faded-text' : 'insert-list-input'
     
     const handleOnChange = (e) => {
         setNewPermiso(prev => ({...prev, [e.target.name]: e.target.value}))
@@ -15,12 +16,12 @@ export default function InsertItem({ type, newPermiso, setNewPermiso }) {
                 <tbody>
                     <tr>
                         <th className='text-right'>MATRIZ:</th>
-                        <td className='insert-list-input-row'><input type="number" required name='MATRIZ' className='insert-list-input' value={newPermiso.MATRIZ} onChange={handleOnChange} /></td>
+                        <td className='insert-list-input-row'><input type="number" required name='MATRIZ' className={name} value={newPermiso.MATRIZ} onChange={handleOnChange} readOnly={type === 'update'} /></td>
                         {/* no se puede editar este campo */}
                     </tr>
                     <tr>
                         <th className='text-right'>DÍGITO:</th>
-                        <td className='insert-list-input-row'><input type="number" required name='DIGITO' className='insert-list-input' value={newPermiso.DIGITO} onChange={handleOnChange} /></td>
+                        <td className='insert-list-input-row'><input type="number" required name='DIGITO' className={name} value={newPermiso.DIGITO} onChange={handleOnChange} readOnly={type === 'update'} /></td>
                         {/* no se puede editar este campo */}
                     </tr>
                     <tr>

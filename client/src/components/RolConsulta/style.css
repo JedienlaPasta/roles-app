@@ -148,6 +148,9 @@ tr:nth-of-type(even) {
     border-radius: 10px 50px 50px 10px;
     outline: none;
 }
+.faded-text {
+    color: #e0dfdf;
+}
 
 .warning {
     font-size: 0.75em;

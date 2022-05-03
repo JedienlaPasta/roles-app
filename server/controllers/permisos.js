@@ -37,32 +37,39 @@ export const createPermiso = async (req, res) => {
     const permiso = await Permiso.findOne({ MATRIZ: req.body.permiso.MATRIZ, DIGITO: req.body.permiso.DIGITO })
     if (permiso) {
         console.log('este permiso ya existe')
-        return res.status(401).json({ message: 'este permiso ya existe'})
+        return res.status(401).json({ message: 'Este permiso ya existe'})
     }
     // si no existe, se intenta ingresar en la DB
     const toInsert = new Permiso(req.body.permiso)
     console.log(req.body.permiso)
     try {
         await toInsert.save()
-        res.status(200).json({ message: 'permiso ingresado exitosamente'})
+        res.status(200).json({ message: 'Permiso ingresado exitosamente'})
     } catch (error) {
-        res.status(401).json({ message: 'no se pudo ingresar el permiso' }) // 401?
+        res.status(401).json({ message: 'No se pudo ingresar el permiso' }) // 401?
     }
 }
 
 export const updatePermiso = async (req, res) => {
     const permiso = req.body.permiso
-    if (!permiso) {
+    const toUpdate = await Permiso.findOne({ MATRIZ: permiso.MATRIZ, DIGITO: permiso.DIGITO })
+    if (!toUpdate) {
         console.log('este permiso no existe')
-        return res.status(400).json({ message: 'este permiso no existe' })
+        return res.status(400).json({ message: 'Este permiso no existe' })
     }
-    const toUpdate = new Permiso(permiso)
-    console.log(req.body.permiso)
+    // console.log('==================')
+    // console.log(toUpdate)
+    // se cambian los valores del documento guardado en la DB por los nuevos valores enviados en el body
+    Object.keys(toUpdate.toJSON()).forEach((key) => permiso[key] && (toUpdate[key] = permiso[key]))
+    // console.log(toUpdate)
+    
     try {
-        await toUpdate.save() // not save, but update() or its equivalent
-        res.status(200).json({ message: 'permiso actualizado exitosamente' })
+        toUpdate.save()
+        console.log('permiso actualizado exitosamente')
+        res.status(200).json({ message: 'Permiso actualizado exitosamente' })
     } catch (error) {
-        res.status(401).json({ message: 'no se pudo actualizar el permiso' }) // 401?
+        console.log('no se pudo actualizar el permiso')
+        res.status(401).json({ message: 'No se pudo actualizar el permiso' }) // 401?
     }
 }
 
