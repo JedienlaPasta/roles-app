@@ -4,7 +4,7 @@ export const getPermiso = async (req, res) => {
     const permiso = req.query
     console.log(req.query)
     try {
-        const permisoData = await Permiso.find({ MATRIZ: permiso.matriz, DIGITO: permiso.digito })
+        const permisoData = await Permiso.find({ MATRIZ: permiso?.matriz, DIGITO: permiso?.digito })
         res.status(200).json(permisoData)
     } catch (error) {
         res.status(404).json({ message: 'No se encontro el permiso' })
@@ -34,7 +34,7 @@ export const getPermisosByDIR = async (req, res) => {
 
 export const createPermiso = async (req, res) => {
     // se checkea primero que el permiso no exista
-    const permiso = await Permiso.findOne({ MATRIZ: req.body.permiso.MATRIZ, DIGITO: req.body.permiso.DIGITO })
+    const permiso = await Permiso.findOne({ MATRIZ: req.body.permiso?.MATRIZ, DIGITO: req.body.permiso?.DIGITO })
     if (permiso) {
         console.log('este permiso ya existe')
         return res.status(401).json({ message: 'Este permiso ya existe'})
@@ -52,19 +52,16 @@ export const createPermiso = async (req, res) => {
 
 export const updatePermiso = async (req, res) => {
     const permiso = req.body.permiso
-    const toUpdate = await Permiso.findOne({ MATRIZ: permiso.MATRIZ, DIGITO: permiso.DIGITO })
+    const toUpdate = await Permiso.findOne({ MATRIZ: permiso?.MATRIZ, DIGITO: permiso?.DIGITO })
     if (!toUpdate) {
         console.log('este permiso no existe')
         return res.status(400).json({ message: 'Este permiso no existe' })
     }
-    // console.log('==================')
-    // console.log(toUpdate)
     // se cambian los valores del documento guardado en la DB por los nuevos valores enviados en el body
     Object.keys(toUpdate.toJSON()).forEach((key) => permiso[key] && (toUpdate[key] = permiso[key]))
-    // console.log(toUpdate)
     
     try {
-        toUpdate.save()
+        await toUpdate.save()
         console.log('permiso actualizado exitosamente')
         res.status(200).json({ message: 'Permiso actualizado exitosamente' })
     } catch (error) {
@@ -75,10 +72,17 @@ export const updatePermiso = async (req, res) => {
 
 export const deletePermiso = async (req, res) => {
     const rol = req.query
-    console.log(rol)
+    const toDelete = await Permiso.findOne({ MATRIZ: rol?.matriz, DIGITO: rol?.digito })
+    if (!toDelete) {
+        console.log('este permiso no existe')
+        return res.status(400).json({ message: 'Este permiso no existe' })
+    }
     try {
-        
+        await Permiso.deleteOne({ _id: toDelete._id })
+        console.log('permiso eliminado exitosamente')
+        res.status(200).json({ message: 'Permiso eliminado exitosamente' })
     } catch (error) {
-        
+        console.log('no se pudo eliminar el permiso')
+        res.status(401).json({ message: 'No se pudo eliminar el permiso' })
     }
 }

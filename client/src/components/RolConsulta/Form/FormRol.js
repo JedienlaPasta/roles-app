@@ -3,7 +3,7 @@ import { getPermisos } from '../../../actions/permisos'
 import { isAuthenticated } from '../../../actions/users'
 import { DataContext } from '../../../context/DataContext'
 
-export default function FormRol() {
+export default function FormRol({ crudFilter, setCrudFilter}) {
     const [rol, setRol] = useState({ 
         matriz: '', 
         digito: '' 
@@ -18,6 +18,7 @@ export default function FormRol() {
             setUser(user)
             setIsAuth(isAuthenticated)
             if (isAuthenticated) {
+                setCrudFilter({...crudFilter, type: 'read'})
                 getPermisos(rol, dispatch)
             }
         })

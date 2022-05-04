@@ -8,14 +8,17 @@ import FormDir from './Form/FormDir'
 import List from './List/List'
 import './style.css'
 import Popup from './Popups/Popup'
-import { patchPermiso, postPermiso } from '../../actions/permisos'
 
 export default function AppBody() {
     const [crudFilter, setCrudFilter] = useState({ crudType: 'Consultar', filter: 'ROL', type: 'read', filters: ['Ingresar', 'Consultar']})
-    const filters = [['ROL', <FormRol key={'rol'}/>], ['RUT', <FormRut key={'rut'}/>], ['DIR', <FormDir key={'dir'}/>]]
     const { roles, user, isAuth, dispatch, setPage, showPopup, setShowPopup } = useContext(DataContext)
     const history = useNavigate()
-
+    const filters = [
+        ['ROL', <FormRol key={'rol'} crudFilter={crudFilter} setCrudFilter={setCrudFilter}/>], 
+        ['RUT', <FormRut key={'rut'} crudFilter={crudFilter} setCrudFilter={setCrudFilter}/>], 
+        ['DIR', <FormDir key={'dir'} crudFilter={crudFilter} setCrudFilter={setCrudFilter}/>]
+    ]
+    
     // Ingresar - Consultar filter buttons
     const displayCrudFilters = crudFilter.filters.map(item => <Filter key={item} val={item} crudFilter={crudFilter} type='crud' setCrudFilter={setCrudFilter} />)
     // ROL - RUT - DIR filter buttons
@@ -32,8 +35,16 @@ export default function AppBody() {
 
     // Funciones de botones de accion ( guardar // cancelar )
 
-    const realSave = (event) => {
+    // quizas colocar editPermiso aqui tambien
+
+    const save = (event) => {
         event.preventDefault()
+        setShowPopup(true)
+    }
+
+    const deletePermiso = (event) => {
+        event.preventDefault()
+        setCrudFilter({...crudFilter, type: 'delete'})
         setShowPopup(true)
     }
 
@@ -57,11 +68,11 @@ export default function AppBody() {
                         {   // aqui se define que formulario de renderiza, dependiendo de la opcion elegida: ['ROL', 'RUT', 'DIR']
                             filters.map(item => item[0] === crudFilter.filter ? item[1] : null)
                         }
-                        { roles.length > 0 && <List crudFilter={crudFilter} setCrudFilter={setCrudFilter} setShowPopup={setShowPopup} save={realSave} /> }
+                        { roles.length > 0 && <List crudFilter={crudFilter} setCrudFilter={setCrudFilter} setShowPopup={setShowPopup} save={save} deletePermiso={deletePermiso} /> }
                     </>)
                     :
                     (<>
-                        <List crudFilter={crudFilter} setCrudFilter={setCrudFilter} setShowPopup={setShowPopup} save={realSave} />
+                        <List crudFilter={crudFilter} setCrudFilter={setCrudFilter} setShowPopup={setShowPopup} save={save} />
                     </>)
                 }
             </div>

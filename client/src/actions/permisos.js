@@ -7,7 +7,9 @@ export const getPermisos = async (rol, dispatch) => {
         console.log(data)
         dispatch({ type: ACTIONS.FETCH_MATCHES, payload: data })
     } catch (error) {
-        console.log(error.message)
+        if (error.response) {
+            console.log(error.response.data.message)
+        }
     }
 }
 
@@ -24,6 +26,7 @@ export const getPermisosByDIR = async (dir, dispatch, setMessage) => {
             const err = error.response.data.message + ', failed with status code: '+ error.response.status
             console.log(err)
             setMessage(error.response.data.message)
+            console.log(error.response.data.message)
             // console.log(error.response.data)
             // console.log(error.response.status)
         }
@@ -36,7 +39,7 @@ export const postPermiso = async (permiso, setMessage) => {
         setMessage(data.message)
     } catch (error) {
         if (error.response) {
-            // setMessage(error.response.data.message)
+            setMessage(error.response.data.message)
             console.log(error.response.data.message)
         }
     }
@@ -48,6 +51,19 @@ export const patchPermiso = async (permiso, setMessage) => {
         setMessage(data.message)
     } catch (error) {
         if (error.response) {
+            setMessage(error.response.data.message)
+            console.log(error.response.data)
+        }
+    }
+}
+
+export const delPermiso = async (rol, setMessage) => {
+    try {
+        const { data } = await deletePermiso(rol)
+        setMessage(data.message)
+    } catch (error) {
+        if (error.response) {
+            setMessage(error.response.data.message)
             console.log(error.response.data)
         }
     }

@@ -1,37 +1,41 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { DataContext } from '../../../context/DataContext'
 
-export default function Item({ COMUNA, ANO, SEMESTRE, ASEO, RUT, PROPIETARIO, DIRECCION, ROL_AVALUO_1, ROL_AVALUO_2, NA, CONTRIBUCION, AVALUO_TOTAL, AVALUO_EXENTO, TER_EXEN, UBICACION, DESTINO, index, tot }) {
-    
+export default function Item({ rol, index, tot }) {
+    const { roles } = useContext(DataContext)
+        
     // Para calcular el digito verificador del RUT
     const getDV = () => {
-        const arr = []
-        const mArr = [2, 3, 4, 5, 6, 7]
-        if ( RUT !== 0) {
-            const inverted = RUT.toString().split("").reverse().join("")
-            for (let i = 0; i < inverted.length; i++) {
-                arr[i] = inverted.charAt(i)
-                if(i < mArr.length) {
-                    arr[i] = arr[i] * mArr[i]
-                }
-                else {
-                    let n = i - mArr.length
-                    arr[i] = arr[i] * mArr[n]
+        if (roles.length) {
+            const arr = []
+            const mArr = [2, 3, 4, 5, 6, 7]
+            if ( rol?.RUT !== 0) {
+                const inverted = rol?.RUT.toString().split("").reverse().join("")
+                for (let i = 0; i < inverted.length; i++) {
+                    arr[i] = inverted.charAt(i)
+                    if(i < mArr.length) {
+                        arr[i] = arr[i] * mArr[i]
+                    }
+                    else {
+                        let n = i - mArr.length
+                        arr[i] = arr[i] * mArr[n]
+                    }
                 }
             }
-        }
-        const firstTot = arr.reduce((prev, curr) => prev + curr, 0)
-        const secondTot = firstTot - Math.floor(firstTot / 11) * 11
-        let dv = (11 - secondTot).toString()
-        if (dv > 9) {
-            if (dv === '11') {
-                return dv = '0'
+            const firstTot = arr.reduce((prev, curr) => prev + curr, 0)
+            const secondTot = firstTot - Math.floor(firstTot / 11) * 11
+            let dv = (11 - secondTot).toString()
+            if (dv > 9) {
+                if (dv === '11') {
+                    return dv = '0'
+                }
+                return dv = 'k'
             }
-            return dv = 'k'
+            return dv
         }
-        return dv
     }
 
-    const dv = getDV()
+    const dv = getDV() || ''
 
     const currencyFormat = (val) => {
         return "$" + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
@@ -43,63 +47,63 @@ export default function Item({ COMUNA, ANO, SEMESTRE, ASEO, RUT, PROPIETARIO, DI
                 <tbody>
                     <tr>
                         <th>COMUNA:</th>
-                        <td>{COMUNA}</td>
+                        <td>{rol?.COMUNA}</td>
                     </tr>
                     <tr>
                         <th>AÑO:</th>
-                        <td>{ANO}</td>
+                        <td>{rol?.ANO}</td>
                     </tr>
                     <tr>
                         <th>SEMSTRE:</th>
-                        <td>{SEMESTRE}</td>
+                        <td>{rol?.SEMESTRE}</td>
                     </tr>
                     <tr>
                         <th>ASEO:</th>
-                        <td>{ASEO}</td>
+                        <td>{rol?.ASEO}</td>
                     </tr>
                     <tr>
                         <th>RUT:</th>
-                        <td>{RUT + '-' + dv}</td>
+                        <td>{rol?.RUT + '-' + dv}</td>
                     </tr>
                     <tr>
                         <th>PROPIETARIO:</th>
-                        <td>{PROPIETARIO}</td>
+                        <td>{rol?.PROPIETARIO}</td>
                     </tr>
                     <tr>
                         <th>DIRECCIÓN:</th>
-                        <td>{DIRECCION}</td>
+                        <td>{rol?.DIRECCION}</td>
                     </tr>
                     <tr>
                         <th>ROL AVALÚO:</th>
-                        <td>{ROL_AVALUO_1 + ' - ' + ROL_AVALUO_2}</td>
+                        <td>{rol?.ROL_AVALUO_1 + ' - ' + rol?.ROL_AVALUO_2}</td>
                     </tr>
                     <tr>
                         <th>N/A:</th>
-                        <td>{NA}</td>
+                        <td>{rol?.NA}</td>
                     </tr>
                     <tr>
                         <th>CONTRIBUCIÓN:</th>
-                        <td>{currencyFormat(CONTRIBUCION)}</td>
+                        <td>{currencyFormat(rol?.CONTRIBUCION)}</td>
                     </tr>
                     <tr>
                         <th>AVALÚO TOTAL:</th>
-                        <td>{currencyFormat(AVALUO_TOTAL)}</td>
+                        <td>{currencyFormat(rol?.AVALUO_TOTAL)}</td>
                     </tr>
                     <tr>
                         <th>AVALÚO EXENTO:</th>
-                        <td>{currencyFormat(AVALUO_EXENTO)}</td>
+                        <td>{currencyFormat(rol?.AVALUO_EXENTO)}</td>
                     </tr>
                     <tr>
                         <th>TER.EXEN:</th>
-                        <td>{currencyFormat(TER_EXEN)}</td>
+                        <td>{currencyFormat(rol?.TER_EXEN)}</td>
                     </tr>
                     <tr>
                         <th>DESTINO:</th>
-                        <td>{UBICACION}</td>
+                        <td>{rol?.UBICACION}</td>
                     </tr>
                     <tr>
                         <th>UBICACIÓN:</th>
-                        <td>{DESTINO}</td>
+                        <td>{rol?.DESTINO}</td>
                     </tr>
                 </tbody>
             </table>

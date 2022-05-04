@@ -3,11 +3,10 @@ import { ACTIONS, DataContext } from '../../../context/DataContext'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 import InsertItem from './InsertItem'
 import Item from './Item'
-import { patchPermiso, postPermiso } from '../../../actions/permisos'
 
-export default function List({ crudFilter, setCrudFilter, save }) {
-    const [rolIndex, setRolIndex] = useState(0)
-    const { roles, dispatch, newPermiso, setNewPermiso, user, setMessage } = useContext(DataContext)
+export default function List({ crudFilter, setCrudFilter, save, deletePermiso }) {
+    // const [rolIndex, setRolIndex] = useState(0)
+    const { roles, dispatch, user, rolIndex, setRolIndex, newPermiso, setNewPermiso } = useContext(DataContext)
     const totRoles = roles.length
     const type = crudFilter.type
     
@@ -24,26 +23,25 @@ export default function List({ crudFilter, setCrudFilter, save }) {
 
     // Functions
 
-    const goForward = () => {
+    const goForward = (event) => {
+        event.preventDefault()
         setRolIndex(prev => {
-            if (prev === 4) return 0
+            if (prev === roles.length - 1) return 0
             return prev + 1
         })
     }
 
-    const goBackwards = () => {
+    const goBackwards = (event) => {
+        event.preventDefault()
         setRolIndex(prev => {
-            if (prev === 0) return 4
+            if (prev === 0) return roles.length - 1
             return prev - 1
         })
     }
 
-    const deletePermiso = () => {
-
-    }
-
     const editPermiso = () => {
         dispatch({ type: ACTIONS.FETCH_MATCHES, payload: [roles[rolIndex]] })
+        setRolIndex(0)
         if (crudFilter) {
             setCrudFilter({...crudFilter, type: 'update'})
         }
@@ -59,12 +57,12 @@ export default function List({ crudFilter, setCrudFilter, save }) {
     }
 
     return (
-        <form>
+        <form> {/* instead of type !== 'insert' || 'update' ... maybe use type === 'read' */}
             {   user.role === 'admin' && type !== 'insert' && type !== 'update' &&
                 <div>
                     <p className='warning'>Cuidado, usted tiene permisos para editar y eliminar registros</p>
                     <div className="crud-btns-container">
-                        <button className='crud-btn delete'>Eliminar</button>
+                        <button className='crud-btn delete' onClick={deletePermiso}>Eliminar</button>
                         <button className='crud-btn edit' onClick={editPermiso}>Editar</button>
                     </div>
                 </div>

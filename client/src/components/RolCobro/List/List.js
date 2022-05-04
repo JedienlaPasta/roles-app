@@ -10,19 +10,19 @@ export default function List({ filter }) {
     const totRoles = roles.length
 
     const displayItems = roles.map((rol, index) => ( index === rolIndex ?
-        <Item key={rol._id} {...rol} index={index} tot={totRoles} /> : null
+        <Item key={rol._id} rol={rol} index={index} tot={totRoles} /> : null
     ))
 
     const goForward = () => {
         setRolIndex(prev => {
-            if (prev === 4) return 0
+            if (prev === roles.length - 1) return 0
             return prev + 1
         })
     }
 
     const goBackwards = () => {
         setRolIndex(prev => {
-            if (prev === 0) return 4
+            if (prev === 0) return roles.length - 1
             return prev - 1
         })
     }

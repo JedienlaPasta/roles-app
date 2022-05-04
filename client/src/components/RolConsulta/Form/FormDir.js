@@ -3,7 +3,7 @@ import { getPermisosByDIR } from '../../../actions/permisos'
 import { isAuthenticated } from '../../../actions/users'
 import { DataContext } from '../../../context/DataContext'
 
-export default function FormRut() {
+export default function FormRut({ crudFilter, setCrudFilter}) {
     const [dir, setDir] = useState('')
 
     const { dispatch, setUser, setIsAuth } = useContext(DataContext)
@@ -15,6 +15,7 @@ export default function FormRut() {
             setUser(user)
             setIsAuth(isAuthenticated)
             if (isAuthenticated) {
+                setCrudFilter({...crudFilter, type: 'read'})
                 getPermisosByDIR(dir, dispatch)
             }
         })

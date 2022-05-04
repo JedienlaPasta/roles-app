@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { CgClose } from 'react-icons/cg'
-import { patchPermiso, postPermiso } from '../../../actions/permisos'
+import { delPermiso, patchPermiso, postPermiso } from '../../../actions/permisos'
 import { ACTIONS, DataContext } from '../../../context/DataContext'
 
 export default function Popup({ showPopup, setShowPopup, crudFilter, setCrudFilter }) {
     const [msg, setMsg] = useState('')
     const [loading, setLoading] = useState(true)
-    const [sent, setSent] = useState(false)
     const { message, setMessage, newPermiso, setNewPermiso, dispatch } = useContext(DataContext)
 
     useEffect(() => {
@@ -15,15 +14,26 @@ export default function Popup({ showPopup, setShowPopup, crudFilter, setCrudFilt
 
     useEffect(() => {
         if (message) {
-            console.log('sent')
             setMsg(message)
             setLoading(false)
         }
         else if (crudFilter.type === 'update' && !message) {
-            console.log('not sent')
             setMsg('Los datos se sobreescribiran, por lo que estos no se podran recuperar')
             console.log(crudFilter.type)
             setLoading(false)
+        }
+        else if (crudFilter.type === 'insert') {
+            // check if fields are not empty
+            setMsg('Guardando...')
+            console.log(crudFilter.type)
+            setLoading(false)
+            savePermiso()
+        }
+        else if (crudFilter.type === 'delete') {
+            setMsg('Los datos se eliminaran permanentemente')
+            console.log(crudFilter.type)
+            setLoading(false)
+            // deletePermiso()
         }
     }, [showPopup, message])
 
@@ -34,18 +44,26 @@ export default function Popup({ showPopup, setShowPopup, crudFilter, setCrudFilt
         if (isValid) {
             if (crudFilter.type === 'insert') {
                 postPermiso(newPermiso, setMessage)
-                setSent(true)
-                setShowPopup(false)
             }
             if (crudFilter.type === 'update') {
+                setMsg('Guardando...')
                 patchPermiso(newPermiso, setMessage)
-                setSent(true)
-                setShowPopup(false)
-                // setCrudFilter({...crudFilter, type: 'read'})
             }
             // Se vacia el formulario una vez ingresado el permiso
             setNewPermiso({ MATRIZ: '', DIGITO: '', NOMBRE: '', APELLIDO_P: '', APELLIDO_M: '', MZ: '', NSTPC: '', CALLE: '', SECTOR: '', N_VIV: '', M2_C_RECEP: '', M2_C_PERM: '', M2_S_PERM: '', M2_TOTAL: '', ESTADO: '' })
         }
+        else {
+            if (crudFilter.type === 'insert') {
+                setMessage('Campos incompletos, intente nuevamente')
+            }
+            if (crudFilter.type === 'update') {
+                setMessage('Campos incompletos, intente nuevamente')
+            }
+        }
+    }
+
+    const deletePermiso = () => {
+        delPermiso({ matriz: newPermiso.MATRIZ, digito: newPermiso.DIGITO }, setMessage)
     }
 
     const reset = () => {
@@ -61,18 +79,18 @@ export default function Popup({ showPopup, setShowPopup, crudFilter, setCrudFilt
     
     const finish = () => {
         reset()
-        setCrudFilter({...crudFilter, type: 'read'})
+        if (crudFilter.type === 'update' || crudFilter.type === 'delete') {
+            setCrudFilter({...crudFilter, crudType: 'Consultar', type: 'read'})
+        }
         dispatch({ type: ACTIONS.FETCH_MATCHES, payload: [] })
     }
-
-    console.log(message)
 
     return (
         <div className='popup-background'>
             { !message &&
                 <div className="popup-container">
                     <div className="popup-header">
-                        { crudFilter.type === 'update' && <h4 className="popup-title"> {/* !message && ... */}
+                        { crudFilter.type !== 'insert' && crudFilter.type !== 'read' && msg !== 'Guardando...' && <h4 className="popup-title"> {/* !message && ... */}
                             Estas seguro de que quieres continuar?
                         </h4>}
                         <button className='popup-close-btn' onClick={close}><CgClose/></button>
@@ -80,8 +98,12 @@ export default function Popup({ showPopup, setShowPopup, crudFilter, setCrudFilt
                     <div className='popup-body-container'>
                         <p className='popup-body'>{ loading ? 'Loading...' : msg }</p>
                     </div>
-                    { crudFilter.type === 'update' && <div className="popup-btns"> {/* !message && ... */}
-                        <button className='popup-continue-btn' onClick={savePermiso}>Continuar</button>
+                    { crudFilter.type !== 'insert' && crudFilter.type !== 'read' && msg !== 'Guardando...' && <div className="popup-btns"> {/* !message && ... */}
+                        {   crudFilter.type === 'update' ?
+                            <button className='popup-continue-btn' onClick={savePermiso}>Continuar</button>
+                            :
+                            <button className='popup-continue-btn' onClick={deletePermiso}>Continuar</button>
+                        }
                         <button className='popup-cancel-btn' onClick={close}>Cancelar</button>
                     </div>}
                 </div>
@@ -89,12 +111,14 @@ export default function Popup({ showPopup, setShowPopup, crudFilter, setCrudFilt
             {   message &&
                 <div className="popup-container">
                     <div className="popup-header">
-                        <button className='popup-close-btn' onClick={close}><CgClose/></button>
+                        <button className='popup-close-btn' onClick={finish}><CgClose/></button>
                     </div>
                     <div className='popup-body-container'>
                         <p className='popup-body'>{ loading ? 'Loading...' : msg }</p>
                     </div>
-                    <button className='popup-cancel-btn' onClick={finish}>Cerrar</button>
+                    <div className="popup-btns">
+                        <button className='popup-cancel-btn' onClick={finish}>Cerrar</button>
+                    </div>
                 </div>
             }
         </div>

@@ -28,7 +28,7 @@ export const userAuth = async (req, res) => {
 
     const user = await User.findOne({ name })
     if (user == null) {
-        return res.status(400).json({ message: 'user not found' })
+        return res.status(400).json({ message: 'Credenciales incorrectas, vuelva a intentarlo *' })
     }
 
     try {
@@ -36,12 +36,12 @@ export const userAuth = async (req, res) => {
             const token = accessToken(user.id)
             res.cookie('token', token, { httpOnly: true, maxAge: 3000000 })
             res.json({
-                message: 'signed in successfully',
+                message: 'Signed in successfully',
                 isAuthenticated: true,
                 user: { name: user.name, role: user.role }
             })
         }
-        else res.status(401).json({ message: 'not authorized, invalid credentials' })
+        else res.status(401).json({ message: 'Not authorized, invalid credentials' })
     } catch (error) {
         res.status(400).json({ message: error.message })
     }

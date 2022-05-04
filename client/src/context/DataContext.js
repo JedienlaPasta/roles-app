@@ -25,6 +25,7 @@ export const DataProvider = ({ children }) => {
     const [isLoaded, setIsLoaded] = useState(false)
     const [message, setMessage] = useState('')
     const [page, setPage] = useState('')
+    const [rolIndex, setRolIndex] = useState(0)
     const [showPopup, setShowPopup] = useState(false)
     const [newPermiso, setNewPermiso] = useState({ MATRIZ: '', DIGITO: '', NOMBRE: '', APELLIDO_P: '', APELLIDO_M: '', MZ: '', NSTPC: '', CALLE: '', SECTOR: '', N_VIV: '', M2_C_RECEP: '', M2_C_PERM: '', M2_S_PERM: '', M2_TOTAL: '', ESTADO: '' })
 
@@ -42,21 +43,28 @@ export const DataProvider = ({ children }) => {
     }, [isAuth, user])
 
     useEffect(() => {
-        // se asignan los valores en roles a newPermiso, cada vez que estos se cambian
-        Object.keys(newPermiso).forEach(key => newPermiso[key] = roles[0]?.[key] || '')
-    }, [roles])
+        // const isValid = Object.keys(newPermiso).every(key => newPermiso[key] === '')
+        // if (isValid) {
+            //     Object.keys(newPermiso).forEach(key => newPermiso[key] = roles[rolIndex]?.[key] || '')
+            // }
+        // se asignan los valores en roles a newPermiso, cada vez que estos se cambian, en caso de no estar definidos, se asigna un ''
+        Object.keys(newPermiso).forEach(key => newPermiso[key] = roles[rolIndex]?.[key] || '')
+    }, [roles, rolIndex])
 
     useEffect(() => {
         if (message !== '') {
             setShowPopup(true)
         }
+        else {
+            setShowPopup(false)
+        }        
     }, [message])
 
     return (
         <div>
             {
                 !isLoaded ? <h1>Loading...</h1> :
-                <DataContext.Provider value={{ roles, dispatch, user, setUser, isAuth, setIsAuth, page, setPage, message, setMessage, newPermiso, setNewPermiso,showPopup, setShowPopup }}>
+                <DataContext.Provider value={{ roles, dispatch, user, setUser, isAuth, setIsAuth, page, setPage, message, setMessage, newPermiso, setNewPermiso,showPopup, setShowPopup, rolIndex, setRolIndex }}>
                     { children }
                 </DataContext.Provider>
             }

@@ -29,7 +29,7 @@ button {
 /* auth ================================================================ */
 .login-container {
     width: 300px;
-    height: 250px;
+    height: 240px;
     padding: 30px 10px;
     position: relative;
     left: 50%;
@@ -37,6 +37,8 @@ button {
     background-color: var(--clr-gray3);
     box-shadow: var(--shd-v1);
     border-radius: 0.8rem;
+    display: flex;
+    flex-direction: column;
 }
 .login-icon {
     display: flex;
@@ -53,9 +55,15 @@ button {
     width: fit-content;
     margin: auto;
     position: relative;
+    top: 0;
+    margin-top: 10px;
 }
-.login-title {
-    margin-top: 20px;
+.login-message {
+    position: relative;
+    top: 15px;
+    padding: 0 10px;
+    font-size: 0.6em;
+    color: #fa5f5f;
 }
 .form-item {
     top: 5px;
@@ -73,6 +81,12 @@ button {
     background: none;
     position: absolute;
     transition: border 200ms ease-in;
+}
+.login-input.red-border {
+    border: 2px solid #fa5f5f;
+}
+.login-label.red-border {
+    color: #fa5f5f;
 }
 .login-input:focus {
     border: 2px solid var(--clr-b1);
