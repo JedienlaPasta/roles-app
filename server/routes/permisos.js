@@ -4,11 +4,11 @@ import { authenticateToken } from '../middleware/authMiddleware.js'
 
 const router = express.Router()
 
-router.get('/rol', getPermiso)
-router.get('/rut', getPermisoByRUT)
-router.get('/dir', getPermisosByDIR)
-router.post('/create', createPermiso)
-router.patch('/update', updatePermiso)
-router.delete('/delete', deletePermiso)
+router.get('/rol', authenticateToken, getPermiso)
+router.get('/rut', authenticateToken, getPermisoByRUT)
+router.get('/dir', authenticateToken, getPermisosByDIR)
+router.post('/create', authenticateToken, createPermiso)
+router.patch('/update', authenticateToken, updatePermiso)
+router.delete('/delete', authenticateToken, deletePermiso)
 
 export default router

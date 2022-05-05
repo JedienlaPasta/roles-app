@@ -19,7 +19,7 @@ export const register = async (req, res) => {
         role
     })
 
-    res.status(201).json({message: 'user registered succesfuly!'})
+    res.status(201).json({message: 'Sser registered successfully!'})
 }
 
 export const userAuth = async (req, res) => {
@@ -34,14 +34,14 @@ export const userAuth = async (req, res) => {
     try {
         if (await bcrypt.compare(password, user.password)) {
             const token = accessToken(user.id)
-            res.cookie('token', token, { httpOnly: true, maxAge: 3000000 })
+            res.cookie('token', token, { httpOnly: true, maxAge: 3600000 })
             res.json({
                 message: 'Signed in successfully',
                 isAuthenticated: true,
                 user: { name: user.name, role: user.role }
             })
         }
-        else res.status(401).json({ message: 'Not authorized, invalid credentials' })
+        else res.status(401).json({ message: 'Credenciales incorrectas, vuelva a intentarlo *' })
     } catch (error) {
         res.status(400).json({ message: error.message })
     }
@@ -67,5 +67,5 @@ export const isAuth = async (req, res) => {
     const user = await User.findOne({ _id: id })
     res.status(200).json({ isAuthenticated: true, user: { name: user.name, role: user.role }})
 }
-// 300 => 5 min
-const accessToken = (id) => jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3000})
+// 300 => 5 min \\ 3600 => 1h
+const accessToken = (id) => jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600})

@@ -1,12 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { ACTIONS, DataContext } from '../../../context/DataContext'
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
 import InsertItem from './InsertItem'
 import Item from './Item'
 
-export default function List({ crudFilter, setCrudFilter, save, deletePermiso }) {
-    // const [rolIndex, setRolIndex] = useState(0)
-    const { roles, dispatch, user, rolIndex, setRolIndex, newPermiso, setNewPermiso } = useContext(DataContext)
+export default function List({ save, deletePermiso }) {
+    const { roles, dispatch, user, rolIndex, setRolIndex, newPermiso, setNewPermiso, crudFilter, setCrudFilter } = useContext(DataContext)
     const totRoles = roles.length
     const type = crudFilter.type
     

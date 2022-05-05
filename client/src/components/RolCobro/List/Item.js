@@ -6,10 +6,10 @@ export default function Item({ rol, index, tot }) {
         
     // Para calcular el digito verificador del RUT
     const getDV = () => {
-        if (roles.length) {
+        if (roles?.length) {
             const arr = []
             const mArr = [2, 3, 4, 5, 6, 7]
-            if ( rol?.RUT !== 0) {
+            if ( rol?.RUT !== 0 && !roles[0]?.MATRIZ) {
                 const inverted = rol?.RUT.toString().split("").reverse().join("")
                 for (let i = 0; i < inverted.length; i++) {
                     arr[i] = inverted.charAt(i)
@@ -38,7 +38,7 @@ export default function Item({ rol, index, tot }) {
     const dv = getDV() || ''
 
     const currencyFormat = (val) => {
-        return "$" + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        return "$" + val?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     }
     
     return (

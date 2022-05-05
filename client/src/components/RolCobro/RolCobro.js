@@ -19,7 +19,7 @@ export default function AppBody() {
     useEffect(() => {
         dispatch({ type: ACTIONS.FETCH_MATCHES, payload: [] })
         if (!isAuth) return history('/auth')
-    }, [isAuth])
+    }, [isAuth, dispatch, history])
 
     useEffect (() => {
         setPage(() => 'rolcobro')

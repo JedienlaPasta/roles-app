@@ -7,8 +7,5 @@ const router = express.Router()
 router.get('/rol', authenticateToken, getRoles)
 router.get('/rut', authenticateToken, getRolesByRUT)
 router.get('/dir', authenticateToken, getRolesByDIR)
-// router.post('/', createRol)
-// router.patch('/:id', updateRol)
-// router.delete('/:id', deleteRol)
 
 export default router

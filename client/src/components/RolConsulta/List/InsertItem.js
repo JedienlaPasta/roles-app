@@ -13,7 +13,7 @@ export default function InsertItem({ type, newPermiso, setNewPermiso }) {
             <h4 className={`titulo-resultado ${type === 'insert' && 'new-record'}`}>{title}</h4>
             {type === 'insert' && <p className='warning'>Todos los campos son obligatorios, a excepción de 'Mz' </p>}
             <table className='insert-list-container'>
-                <tbody>
+                <tbody className='insert-table-body'>
                     <tr>
                         <th className='text-right'>MATRIZ:</th>
                         <td className='insert-list-input-row'><input type="number" required name='MATRIZ' className={name} value={newPermiso?.MATRIZ} onChange={handleOnChange} readOnly={type === 'update'} /></td>

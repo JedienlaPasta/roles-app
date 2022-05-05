@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { logout } from '../../actions/users'
 import { ACTIONS, DataContext } from '../../context/DataContext'
 import { RiLogoutBoxRLine } from 'react-icons/ri'
+import './style.css'
 
 export default function Navbar() {
     const { setUser, setIsAuth, dispatch, page } = useContext(DataContext)

@@ -28,6 +28,7 @@ export const DataProvider = ({ children }) => {
     const [rolIndex, setRolIndex] = useState(0)
     const [showPopup, setShowPopup] = useState(false)
     const [newPermiso, setNewPermiso] = useState({ MATRIZ: '', DIGITO: '', NOMBRE: '', APELLIDO_P: '', APELLIDO_M: '', MZ: '', NSTPC: '', CALLE: '', SECTOR: '', N_VIV: '', M2_C_RECEP: '', M2_C_PERM: '', M2_S_PERM: '', M2_TOTAL: '', ESTADO: '' })
+    const [crudFilter, setCrudFilter] = useState({ crudType: 'Consultar', filter: 'ROL', type: 'read', filters: ['Ingresar', 'Consultar']})
 
     useEffect(() => {
         isAuthenticated().then(data => {
@@ -37,34 +38,37 @@ export const DataProvider = ({ children }) => {
         })
     }, [])
 
+    // delete =====================================================================================
     useEffect(() => {
         console.log('Is the user authenticated?: '+isAuth)
         console.log(user)
     }, [isAuth, user])
 
     useEffect(() => {
-        // const isValid = Object.keys(newPermiso).every(key => newPermiso[key] === '')
-        // if (isValid) {
-            //     Object.keys(newPermiso).forEach(key => newPermiso[key] = roles[rolIndex]?.[key] || '')
-            // }
-        // se asignan los valores en roles a newPermiso, cada vez que estos se cambian, en caso de no estar definidos, se asigna un ''
-        Object.keys(newPermiso).forEach(key => newPermiso[key] = roles[rolIndex]?.[key] || '')
+        if (crudFilter.type !== 'insert') {
+            // se asignan los valores en roles a newPermiso, cada vez que estos se cambian, en caso de no estar definidos, se asigna un ''
+            Object.keys(newPermiso).forEach(key => newPermiso[key] = roles[rolIndex]?.[key] || '')
+        }
     }, [roles, rolIndex])
 
+    // useEffect(() => {
+    //     if (message !== '') {
+    //         setShowPopup(true)
+    //     }
+    //     else {
+    //         setShowPopup(false)
+    //     }        
+    // }, [message])
+
     useEffect(() => {
-        if (message !== '') {
-            setShowPopup(true)
-        }
-        else {
-            setShowPopup(false)
-        }        
-    }, [message])
+        setCrudFilter(c => ({...c, crudType: 'Consultar', filter: 'ROL', type: 'read'}))
+    }, [page])
 
     return (
         <div>
             {
                 !isLoaded ? <h1>Loading...</h1> :
-                <DataContext.Provider value={{ roles, dispatch, user, setUser, isAuth, setIsAuth, page, setPage, message, setMessage, newPermiso, setNewPermiso,showPopup, setShowPopup, rolIndex, setRolIndex }}>
+                <DataContext.Provider value={{ roles, dispatch, user, setUser, isAuth, setIsAuth, page, setPage, message, setMessage, newPermiso, setNewPermiso,showPopup, setShowPopup, rolIndex, setRolIndex, crudFilter, setCrudFilter }}>
                     { children }
                 </DataContext.Provider>
             }

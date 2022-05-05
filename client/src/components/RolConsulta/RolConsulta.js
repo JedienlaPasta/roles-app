@@ -10,8 +10,7 @@ import './style.css'
 import Popup from './Popups/Popup'
 
 export default function AppBody() {
-    const [crudFilter, setCrudFilter] = useState({ crudType: 'Consultar', filter: 'ROL', type: 'read', filters: ['Ingresar', 'Consultar']})
-    const { roles, user, isAuth, dispatch, setPage, showPopup, setShowPopup } = useContext(DataContext)
+    const { roles, user, isAuth, dispatch, setPage, showPopup, setShowPopup, crudFilter, setCrudFilter, setNewPermiso } = useContext(DataContext)
     const history = useNavigate()
     const filters = [
         ['ROL', <FormRol key={'rol'} crudFilter={crudFilter} setCrudFilter={setCrudFilter}/>], 
@@ -26,6 +25,7 @@ export default function AppBody() {
 
     useEffect(() => {
         dispatch({ type: ACTIONS.FETCH_MATCHES, payload: [] })
+        setNewPermiso({ MATRIZ: '', DIGITO: '', NOMBRE: '', APELLIDO_P: '', APELLIDO_M: '', MZ: '', NSTPC: '', CALLE: '', SECTOR: '', N_VIV: '', M2_C_RECEP: '', M2_C_PERM: '', M2_S_PERM: '', M2_TOTAL: '', ESTADO: '' })
         if (!isAuth) return history('/auth')
     }, [isAuth, crudFilter.crudType])
 
@@ -49,7 +49,7 @@ export default function AppBody() {
     }
 
     return (
-        <>
+        <div className='app-container'>
             { showPopup && <Popup showPopup={showPopup} setShowPopup={setShowPopup} crudFilter={crudFilter} setCrudFilter={setCrudFilter} /> }
             {   user.role === 'admin' &&
                 <div className="crud-filters">
@@ -76,6 +76,6 @@ export default function AppBody() {
                     </>)
                 }
             </div>
-        </>
+        </div>
     )
 }

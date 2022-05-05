@@ -1,172 +1,55 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 :root {
     /* colors */
     --clr-b1: #3f93e0;
     --clr-b2: #3273b1;
     --clr-red: #ce4a22;
-    --clr-gray: #e3e5e9;
+    --clr-red2: #fa5f5f;
+    --clr-gray: #f3f3f3;
     --clr-gray2: #d7d9dd;
     --clr-gray3: #e6ebee;
+    --clr-white: #f4f4f4;
+    /* --clr-white2: #303e55; */
+    --clr-white2: #525868;
+    --clr-yellow: #d8d676;
     /* box-shadow */
     --shd-v1: 6px 8px 15px 3px rgba(100, 100, 100, 0.2);
+    --shd-v2: 2px 2px 15px 3px rgba(41, 83, 146, 0.5);
 }
 body {
     font-size: 16px;
-    background: linear-gradient(#f0efef, #b7d0e2);
+    /* background: linear-gradient(#f0efef, #b7d0e2); */
+    /* background: linear-gradient(#3e4143, #253139); */
+    background-color: var(--clr-white);
+    background-color: #e2e4e7;
     background-attachment: fixed;
     min-height: 100vh;
+    display: block;
 }
 body, button, input {
-    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Open Sans', sans-serif; */
+    font-family: 'PT Sans', sans-serif;
+    color: #42454b;
+    color: #d7d9dd;
 }
 button {
     cursor: pointer;
 }
 
-/* auth ================================================================ */
-.login-container {
-    width: 300px;
-    height: 240px;
-    padding: 30px 10px;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    background-color: var(--clr-gray3);
-    box-shadow: var(--shd-v1);
-    border-radius: 0.8rem;
-    display: flex;
+/* ================================================================= */
+
+.app-container {
+    display: block;
     flex-direction: column;
 }
-.login-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    font-size: 1.5rem;
-    top: 8%;
-    right: 8%;
-    color: var(--clr-gray2);
-    border-radius: 50%;
-}
-.login-form {
-    width: fit-content;
-    margin: auto;
-    position: relative;
-    top: 0;
-    margin-top: 10px;
-}
-.login-message {
-    position: relative;
-    top: 15px;
-    padding: 0 10px;
-    font-size: 0.6em;
-    color: #fa5f5f;
-}
-.form-item {
-    top: 5px;
-    width: 224px;
-    height: 40px;
-    position: relative;
-    margin-top: 20px;
-}
-.login-input {
-    width: 200px;
-    padding: 10px 10px;
-    border: 2px solid var(--clr-gray2);
-    border-radius: 0.5rem;
-    outline: none;
-    background: none;
-    position: absolute;
-    transition: border 200ms ease-in;
-}
-.login-input.red-border {
-    border: 2px solid #fa5f5f;
-}
-.login-label.red-border {
-    color: #fa5f5f;
-}
-.login-input:focus {
-    border: 2px solid var(--clr-b1);
-}
-.login-input:focus ~ .login-label,
-.login-input:not(:placeholder-shown).login-input:not(:focus) ~ .login-label {
-    top: -0.8rem;
-    left: 0.7rem;
-    font-size: 0.7rem;
-}
-.login-input:focus ~ .login-label {
-    color: var(--clr-b1);
-}
-.login-label {
-    position: relative;
-    padding: 0 0.5rem;
-    left: 0.5rem;
-    top: 0.5rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #818181;
-    background-color: var(--clr-gray3);
-    transition: top 200ms ease-in,
-        left 200ms ease-in,
-        color 200ms ease-in,
-        font-size 200ms ease-in;
-    cursor: text;
-}
-.login-button {
-    font-size: 0.9rem;
-    padding: 9px 18px;
-    border-radius: 0.5rem;
-    border: 0;
-    margin-top: 25px;
-    position: absolute;
-    right: 0;
-    background-color: var(--clr-b1);
-    color: white;
-}
-.login-button:active {
-    background-color: var(--clr-b2);
-}
-/* header ============================================================== */
-.nav-header {
-    /* background-color: rgb(235, 228, 228); */
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    height: 100px;
-}
-.nav-links {
-    display: flex;
-}
-.link {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    margin-left: 25px;
-    font-size: 0.75em;
-    font-weight: 600;
-}
-.link-item {
-    text-decoration: none;
-    color: #133274;
-}
-.logout {
-    text-decoration: none;
-    font-size: 1.2em;
-    background-color: rgba(154, 165, 173, 0.164);
-    display: flex;
-    padding: 10px;
-    border-radius: 8px;
-    color: rgb(112, 112, 112);
-    transition: background-color ease-in 200ms,
-                color ease-in 200ms;
-}
-.logout:hover {
-    background-color: var(--clr-b2);
-    color: white;
-}
+
+
+
+/* ================================================================= */
 
 @media (max-width: 500px) {
     body {

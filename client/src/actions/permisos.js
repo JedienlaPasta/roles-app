@@ -23,9 +23,7 @@ export const getPermisosByDIR = async (dir, dispatch, setMessage) => {
         dispatch({ type: ACTIONS.FETCH_MATCHES, payload: data })
     } catch (error) {
         if (error.response) {
-            const err = error.response.data.message + ', failed with status code: '+ error.response.status
-            console.log(err)
-            setMessage(error.response.data.message)
+            setTimeout(() => setMessage(error.response.data.message), 500)
             console.log(error.response.data.message)
             // console.log(error.response.data)
             // console.log(error.response.status)
@@ -36,10 +34,10 @@ export const getPermisosByDIR = async (dir, dispatch, setMessage) => {
 export const postPermiso = async (permiso, setMessage) => {
     try {
         const { data } = await createPermiso(permiso)
-        setMessage(data.message)
+        setTimeout(()=>setMessage(data.message), 500)
     } catch (error) {
         if (error.response) {
-            setMessage(error.response.data.message)
+            setTimeout(() => setMessage(error.response.data.message), 500)
             console.log(error.response.data.message)
         }
     }
@@ -48,11 +46,11 @@ export const postPermiso = async (permiso, setMessage) => {
 export const patchPermiso = async (permiso, setMessage) => {
     try {
         const { data } = await updatePermiso(permiso)
-        setMessage(data.message)
+        setTimeout(() => setMessage(data.message), 500)
     } catch (error) {
         if (error.response) {
-            setMessage(error.response.data.message)
-            console.log(error.response.data)
+            setTimeout(() => setMessage(error.response.data.message), 500)
+            console.log(error.response.data.message)
         }
     }
 }
@@ -60,11 +58,11 @@ export const patchPermiso = async (permiso, setMessage) => {
 export const delPermiso = async (rol, setMessage) => {
     try {
         const { data } = await deletePermiso(rol)
-        setMessage(data.message)
+        setTimeout(() => setMessage(data.message), 500)
     } catch (error) {
         if (error.response) {
-            setMessage(error.response.data.message)
-            console.log(error.response.data)
+            setTimeout(() => setMessage(error.response.data.message), 500)
+            console.log(error.response.data.message)
         }
     }
 }

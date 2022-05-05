@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { CgClose } from 'react-icons/cg'
 import { delPermiso, patchPermiso, postPermiso } from '../../../actions/permisos'
 import { ACTIONS, DataContext } from '../../../context/DataContext'
+import './style.css'
 
 export default function Popup({ showPopup, setShowPopup, crudFilter, setCrudFilter }) {
     const [msg, setMsg] = useState('')
@@ -53,16 +54,14 @@ export default function Popup({ showPopup, setShowPopup, crudFilter, setCrudFilt
             setNewPermiso({ MATRIZ: '', DIGITO: '', NOMBRE: '', APELLIDO_P: '', APELLIDO_M: '', MZ: '', NSTPC: '', CALLE: '', SECTOR: '', N_VIV: '', M2_C_RECEP: '', M2_C_PERM: '', M2_S_PERM: '', M2_TOTAL: '', ESTADO: '' })
         }
         else {
-            if (crudFilter.type === 'insert') {
-                setMessage('Campos incompletos, intente nuevamente')
-            }
-            if (crudFilter.type === 'update') {
+            if (crudFilter.type === 'insert' || crudFilter.type === 'update') {
                 setMessage('Campos incompletos, intente nuevamente')
             }
         }
     }
 
     const deletePermiso = () => {
+        setMsg('Eliminando...')
         delPermiso({ matriz: newPermiso.MATRIZ, digito: newPermiso.DIGITO }, setMessage)
     }
 
@@ -90,7 +89,7 @@ export default function Popup({ showPopup, setShowPopup, crudFilter, setCrudFilt
             { !message &&
                 <div className="popup-container">
                     <div className="popup-header">
-                        { crudFilter.type !== 'insert' && crudFilter.type !== 'read' && msg !== 'Guardando...' && <h4 className="popup-title"> {/* !message && ... */}
+                        { crudFilter.type !== 'insert' && crudFilter.type !== 'read' && msg !== 'Guardando...' && msg !== 'Eliminando...' && <h4 className="popup-title"> {/* !message && ... */}
                             Estas seguro de que quieres continuar?
                         </h4>}
                         <button className='popup-close-btn' onClick={close}><CgClose/></button>
@@ -98,7 +97,7 @@ export default function Popup({ showPopup, setShowPopup, crudFilter, setCrudFilt
                     <div className='popup-body-container'>
                         <p className='popup-body'>{ loading ? 'Loading...' : msg }</p>
                     </div>
-                    { crudFilter.type !== 'insert' && crudFilter.type !== 'read' && msg !== 'Guardando...' && <div className="popup-btns"> {/* !message && ... */}
+                    { crudFilter.type !== 'insert' && crudFilter.type !== 'read' && msg !== 'Guardando...' && msg !== 'Eliminando...' && <div className="popup-btns"> {/* !message && ... */}
                         {   crudFilter.type === 'update' ?
                             <button className='popup-continue-btn' onClick={savePermiso}>Continuar</button>
                             :

@@ -4,6 +4,7 @@ import { FaUserAstronaut } from 'react-icons/fa'
 import { DataContext } from '../../context/DataContext'
 import { login } from '../../actions/users' 
 import Message from './Message'
+import './style.css'
 
 export default function Auth() {
     const [authUser, setAuthUser] = useState({name: '', password: ''})
