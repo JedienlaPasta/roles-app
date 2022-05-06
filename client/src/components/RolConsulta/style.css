@@ -42,7 +42,7 @@
 .marked {
     background-color: var(--clr-b2);
     background-color: var(--clr-b1);
-    color: rgb(224, 224, 224);
+    color: white;
 }
 
 .body-container {
@@ -58,7 +58,8 @@
     /* background-color: var(--clr-gray3); */
     background-color: var(--clr-white2);
     background: linear-gradient(20deg ,#383a3ba4, #262f34);
-    background: linear-gradient(20deg ,#383a3ba4, #2f3c42);
+    background: linear-gradient(20deg ,#383a3ba4, #2f3c42 80%, #2f3c42);
+    background: linear-gradient(20deg ,#5e6161, #2d373c 80%, #2d373c);
     box-shadow: var(--shd-v1);
     border-radius: 0.8rem;
 }
@@ -77,21 +78,29 @@
     border: 1px solid var(--clr-gray2);
     border: 0px;
     border-radius: 0.5rem;
+    border-radius: 0.2rem;
     outline: none;
     background: none;
     background-color: #393d43;
+    border: 1px solid #393d43;
     color: white;
 }
 .inputs > input:focus {
-    background-color: #2c3642;
+    background-color: #393d43;
+    border: 1px solid var(--clr-b1);
 }
 .inputs > input:nth-of-type(even) {
     margin-left: 8px;
+}
+.inputs > input::-webkit-outer-spin-button,
+.inputs > input::-webkit-inner-spin-button {
+    appearance: none;
 }
 .form-consulta > button {
     font-size: 0.9em;
     padding: 9px 18px;
     border-radius: 0.5rem;
+    border-radius: 0.2rem;
     border: 0;
     background-color: rgb(39, 62, 71);
     background-color: var(--clr-b2);
@@ -150,6 +159,7 @@ tr:nth-of-type(even) {
 /* insert list ========================================================= */
 .text-right {
     text-align: right;
+    color: #f3f3f3;
 }
 .insert-list-input-row {
     padding: 5px 5px;
@@ -182,7 +192,6 @@ tr:nth-of-type(even) {
     border-radius: 0.5rem;
     border: 0;
     background-color: var(--clr-b1);
-    /* font-weight: 600; */
     color: white;
     margin-top: 10px;
 }

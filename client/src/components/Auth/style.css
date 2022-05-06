@@ -8,6 +8,8 @@
     transform: translate(-50%, 50%);
     /* background-color: var(--clr-gray3); */
     background-color: var(--clr-white2);
+    background: linear-gradient(20deg ,#383a3ba4, #2f3c42);
+    background-color: #2f3c42;
     box-shadow: var(--shd-v1);
     border-radius: 0.8rem;
     display: flex;
@@ -52,7 +54,9 @@
     width: 100%;
     padding: 10px 15px;
     border: 1px solid var(--clr-gray2);
+    border: 1px solid #606060;
     border-radius: 0.5rem;
+    border-radius: 0.2rem;
     outline: none;
     background: none;
     position: absolute;
@@ -93,11 +97,13 @@
         font-size 200ms ease-in;
     cursor: text;
     user-select: none;
+    background-color: #2f3c42;
 }
 .login-button {
     font-size: 0.9rem;
     padding: 9px 18px;
     border-radius: 0.5rem;
+    border-radius: 0.2rem;
     border: 0;
     margin-top: 25px;
     position: absolute;
