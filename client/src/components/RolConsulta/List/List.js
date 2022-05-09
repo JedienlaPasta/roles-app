@@ -20,7 +20,7 @@ export default function List({ save, deletePermiso }) {
         ))
     }
 
-    // Functions
+    // Funciones
 
     const goForward = (event) => {
         event.preventDefault()
@@ -56,7 +56,7 @@ export default function List({ save, deletePermiso }) {
     }
 
     return (
-        <form> {/* instead of type !== 'insert' || 'update' ... maybe use type === 'read' */}
+        <form>
             {   user.role === 'admin' && type !== 'insert' && type !== 'update' &&
                 <div>
                     <p className='warning'>Cuidado, usted tiene permisos para editar y eliminar registros</p>

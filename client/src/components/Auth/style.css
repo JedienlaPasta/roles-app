@@ -6,10 +6,7 @@
     position: relative;
     left: 50%;
     transform: translate(-50%, 50%);
-    /* background-color: var(--clr-gray3); */
-    background-color: var(--clr-white2);
-    background: linear-gradient(20deg ,#383a3ba4, #2f3c42);
-    background-color: #2f3c42;
+    background-color: #ececec;
     box-shadow: var(--shd-v1);
     border-radius: 0.8rem;
     display: flex;
@@ -23,7 +20,7 @@
     font-size: 1.5rem;
     top: 8%;
     right: 8%;
-    color: var(--clr-gray2);
+    color: var(--clr-gray);
     border-radius: 50%;
 }
 .login-title {
@@ -38,29 +35,29 @@
 }
 .login-message {
     position: relative;
-    top: 15px;
+    top: 25px;
     padding: 0 10px;
     font-size: 0.6em;
     color: var(--clr-red2);
 }
 .form-item {
-    top: 5px;
+    top: 15px;
     width: 224px;
     height: 40px;
     position: relative;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 .login-input {
     width: 100%;
     padding: 10px 15px;
-    border: 1px solid var(--clr-gray2);
-    border: 1px solid #606060;
-    border-radius: 0.5rem;
+    border: 1px solid var(--clr-gray);
     border-radius: 0.2rem;
     outline: none;
     background: none;
     position: absolute;
-    transition: border 200ms ease-in;
+    transition: background-color 200ms ease-in,
+                border 200ms ease-in;
+                
 }
 .login-input.red-border {
     border: 1px solid var(--clr-red2);
@@ -69,7 +66,8 @@
     color: var(--clr-red2);
 }
 .login-input:focus {
-    border: 1px solid var(--clr-b1);
+    border: 1px solid var(--clr-blue);
+    background-color: #e9f2f8;
 }
 .login-input:focus ~ .login-label,
 .login-input:not(:placeholder-shown).login-input:not(:focus) ~ .login-label {
@@ -86,10 +84,8 @@
     left: 0.5rem;
     top: 0.6rem;
     font-size: 0.8rem;
-    /* font-weight: bold; */
     font-family: 'Open Sans', sans-serif;
     color: #818181;
-    /* background-color: var(--clr-gray3); */
     background-color: var(--clr-white);
     transition: top 200ms ease-in,
         left 200ms ease-in,
@@ -97,7 +93,7 @@
         font-size 200ms ease-in;
     cursor: text;
     user-select: none;
-    background-color: #2f3c42;
+    background-color: #ececec;
 }
 .login-button {
     font-size: 0.9rem;
@@ -105,12 +101,12 @@
     border-radius: 0.5rem;
     border-radius: 0.2rem;
     border: 0;
-    margin-top: 25px;
+    margin-top: 35px;
     position: absolute;
     right: 0;
-    background-color: var(--clr-b1);
+    background-color: var(--clr-blue);
     color: white;
 }
 .login-button:active {
-    background-color: var(--clr-b2);
+    background-color: var(--clr-blue2);
 }

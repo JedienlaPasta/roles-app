@@ -25,7 +25,5 @@ export default function App() {
 
 // TODO list
 // import & export excel files to & from mongodb, all this from the web app
-// do tests to find bugs and errors
-// improve UX & UI
 // refactor code
 // 
