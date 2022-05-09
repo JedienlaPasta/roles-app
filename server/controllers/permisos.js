@@ -22,10 +22,12 @@ export const getPermisoByRUT = async (req, res) => {
 }
 
 export const getPermisosByDIR = async (req, res) => {
+    console.log(req.query)
     const dir = req.query.dir || 'empty'
-    console.log(dir)
+    const quantity = req.query.quantity || 0
     try {
-        const permiso = await Permiso.find({ CALLE: {$regex: dir, $options: 'i'} }).limit(5)
+        const permiso = await Permiso.find({ CALLE: {$regex: dir, $options: 'i'} }).limit(quantity)
+        console.log(permiso)
         res.status(200).json(permiso)
     } catch (error) {
         res.status(404).json({ message: 'No se encontro el permiso' })

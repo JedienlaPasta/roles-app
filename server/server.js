@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
     res.send('Welcome to Roles API')
 })
 
-const CONNECTION_URL = 'mongodb+srv://mongo:v5OZ83iTS4Q4ICCE@rolescluster.u7c3e.mongodb.net/rolesDB?retryWrites=true&w=majority'
+const CONNECTION_URL = 'mongodb+srv://mongo:BELC6ZxeB53MnQza@rolescluster.u7c3e.mongodb.net/rolesDB?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000
 
 mongoose.connect(process.env.CONNECTION_URL || CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })

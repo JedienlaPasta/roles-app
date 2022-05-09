@@ -74,7 +74,9 @@
 }
 .inputs {
     display: flex;
-    justify-content: center
+    justify-content: center;
+    min-width: 406px;
+    max-width: 100%;
 }
 .inputs > input {
     font-size: 0.9em;
@@ -100,6 +102,14 @@
 .inputs > input::-webkit-inner-spin-button {
     appearance: none;
 }
+.grid-inputs {
+    display: grid;
+    grid-template-columns: 0.85fr 0.15fr;
+    column-gap: 5px;
+}
+.grid-inputs > input:nth-of-type(even) {
+    margin-left: 0;
+}
 .form-consulta > button {
     font-size: 0.9em;
     padding: 9px 18px;
@@ -108,8 +118,7 @@
     background-color: var(--clr-blue);
     margin-top: -100%;
     color: white;
-    width: 406px;
-    max-width: 100%;
+    width: 100%;
 }
 .form-consulta > button:active {
     background-color: var(--clr-blue2);

@@ -51,15 +51,6 @@ export const DataProvider = ({ children }) => {
         }
     }, [roles, rolIndex])
 
-    // useEffect(() => {
-    //     if (message !== '') {
-    //         setShowPopup(true)
-    //     }
-    //     else {
-    //         setShowPopup(false)
-    //     }        
-    // }, [message])
-
     useEffect(() => {
         setCrudFilter(c => ({...c, crudType: 'Consultar', filter: 'ROL', type: 'read'}))
     }, [page])

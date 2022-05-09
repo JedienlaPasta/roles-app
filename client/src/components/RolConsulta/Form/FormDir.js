@@ -5,6 +5,7 @@ import { DataContext } from '../../../context/DataContext'
 
 export default function FormRut({ crudFilter, setCrudFilter}) {
     const [dir, setDir] = useState('')
+    const [quantity, setQuantity] = useState(5)
 
     const { dispatch, setUser, setIsAuth } = useContext(DataContext)
 
@@ -16,15 +17,16 @@ export default function FormRut({ crudFilter, setCrudFilter}) {
             setIsAuth(isAuthenticated)
             if (isAuthenticated) {
                 setCrudFilter({...crudFilter, type: 'read'})
-                getPermisosByDIR(dir, dispatch)
+                getPermisosByDIR(dir, quantity, dispatch)
             }
         })
     }
 
     return (
         <form className='form-consulta' onSubmit={handleSubmit}>
-            <span className='inputs'>
+            <span className='inputs grid-inputs'>
             <input type='text' name='dir' required placeholder='Ingresar Dirección...' value={dir} onChange={(e) => setDir(e.target.value)} />
+            <input type='number' name='quantity' value={quantity} onChange={(e) => setQuantity(e.target.value)} />
             </span>
             <br />
             <button type='submit'>Buscar</button>

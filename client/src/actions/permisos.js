@@ -17,13 +17,13 @@ export const getPermisosByRUT = async () => {
 
 }
 
-export const getPermisosByDIR = async (dir, dispatch, setMessage) => {
+export const getPermisosByDIR = async (dir, quantity, dispatch) => {
     try {
-        const { data } = await fetchPermisosByDIR(dir)
+        const { data } = await fetchPermisosByDIR(dir, quantity)
         dispatch({ type: ACTIONS.FETCH_MATCHES, payload: data })
     } catch (error) {
         if (error.response) {
-            setTimeout(() => setMessage(error.response.data.message), 500)
+            // setTimeout(() => setMessage(error.response.data.message), 500)
             console.log(error.response.data.message)
             // console.log(error.response.data)
             // console.log(error.response.status)

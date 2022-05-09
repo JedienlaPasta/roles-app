@@ -2,24 +2,24 @@ import mongoose from "mongoose";
 
 const permisoSchema = mongoose.Schema({
     MATRIZ: {
-        type: Number,
-        required: true
+        type: String,
+        required: false
     },
     DIGITO: {
-        type: Number,
-        required: true
+        type: String,
+        required: false
     },
     NOMBRE: {
         type: String,
-        required: true
+        required: false
     },
     APELLIDO_P: {
         type: String,
-        required: true
+        required: false
     },
     APELLIDO_M: {
         type: String,
-        required: true
+        required: false
     },
     MZ: {
         type: String,
@@ -27,19 +27,19 @@ const permisoSchema = mongoose.Schema({
     },
     NSTPC: {
         type: String,
-        required: true
+        required: false
     },
     CALLE: {
         type: String,
-        required: true
+        required: false
     },
     SECTOR: {
         type: String,
-        required: true
+        required: false
     },
     N_VIV: {
-        type: Number,
-        required: true
+        type: String,
+        required: false
     },
     M2_C_RECEP: {
         type: Number,
@@ -59,10 +59,10 @@ const permisoSchema = mongoose.Schema({
     },
     ESTADO: {
         type: String,
-        required: true
+        required: false
     },
 })
 
-const Permiso = mongoose.model('Permisos', permisoSchema)
+const Permiso = mongoose.model('permisos', permisoSchema)
 
 export default Permiso
