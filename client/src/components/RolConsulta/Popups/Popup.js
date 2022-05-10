@@ -7,7 +7,7 @@ import './style.css'
 export default function Popup({ showPopup, setShowPopup, crudFilter, setCrudFilter }) {
     const [msg, setMsg] = useState('')
     const [loading, setLoading] = useState(true)
-    const { message, setMessage, newPermiso, setNewPermiso, dispatch } = useContext(DataContext)
+    const { message, setMessage, newPermiso, setNewPermiso, permisoInitialValue, dispatch } = useContext(DataContext)
 
     useEffect(() => {
         setMsg(message)
@@ -51,7 +51,7 @@ export default function Popup({ showPopup, setShowPopup, crudFilter, setCrudFilt
                 patchPermiso(newPermiso, setMessage)
             }
             // Se vacia el formulario una vez ingresado el permiso
-            setNewPermiso({ MATRIZ: '', DIGITO: '', NOMBRE: '', APELLIDO_P: '', APELLIDO_M: '', MZ: '', NSTPC: '', CALLE: '', SECTOR: '', N_VIV: '', M2_C_RECEP: '', M2_C_PERM: '', M2_S_PERM: '', M2_TOTAL: '', ESTADO: '' })
+            setNewPermiso(permisoInitialValue) // se reestablece el valor de newPermiso a su estado original (vacio)
         }
         else {
             if (crudFilter.type === 'insert' || crudFilter.type === 'update') {
@@ -62,7 +62,7 @@ export default function Popup({ showPopup, setShowPopup, crudFilter, setCrudFilt
 
     const deletePermiso = () => {
         setMsg('Eliminando...')
-        delPermiso({ matriz: newPermiso.MATRIZ, digito: newPermiso.DIGITO }, setMessage)
+        delPermiso({ id: newPermiso._id }, setMessage)
     }
 
     const reset = () => {

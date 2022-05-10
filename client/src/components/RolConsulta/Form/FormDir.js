@@ -25,8 +25,14 @@ export default function FormRut({ crudFilter, setCrudFilter}) {
     return (
         <form className='form-consulta' onSubmit={handleSubmit}>
             <span className='inputs grid-inputs'>
-            <input type='text' name='dir' required placeholder='Ingresar Dirección...' value={dir} onChange={(e) => setDir(e.target.value)} />
-            <input type='number' name='quantity' value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+                <div className="input">
+                    <label className='hint'>Dirección</label>
+                    <input type='text' name='dir' required placeholder='Ingresar Dirección...' value={dir} onChange={(e) => setDir(e.target.value)} />
+                </div>
+                <div className="input">
+                    <label className='hint'>Resultados</label>
+                    <input type='number' name='quantity' className='text-center' value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+                </div>
             </span>
             <br />
             <button type='submit'>Buscar</button>

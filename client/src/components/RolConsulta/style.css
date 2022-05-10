@@ -30,6 +30,8 @@
 /* form ================================================================ */
 .filter-links {
     display: inline-flex;
+    justify-content: center;
+    width: 100%;
 }
 .filter-link {
     display: flex;
@@ -37,6 +39,7 @@
     align-items: center;
     list-style: none;
     width: 70px;
+    width: 20%;
     padding: 3px 20px;
     margin: 0 10px;
     border-radius: 50px;
@@ -54,8 +57,7 @@
 }
 
 .body-container {
-    width: 420px;
-    min-width: fit-content;
+    width: 500px;
     max-width: 95%;
     display: flex;
     flex-direction: column;
@@ -67,18 +69,16 @@
     background-color: #ececec;
     box-shadow: var(--shd-v1);
     border-radius: 0.8rem;
+    position: relative;
 }
 .form-consulta {
-    margin-top: 20px;
+    margin-top: 25px;
     width: 100%;
 }
-.inputs {
-    display: flex;
-    justify-content: center;
-    min-width: 406px;
-    max-width: 100%;
+.inputs > .input > {
+    width: inherit;
 }
-.inputs > input {
+.inputs > .input > input {
     font-size: 0.9em;
     width: 100%;
     padding: 10px 10px;
@@ -91,24 +91,32 @@
     transition: background-color ease-in 150ms,
                 border ease-in 150ms;
 }
-.inputs > input:focus {
+.inputs > .input > input:focus {
     background-color: #e9f2f8;
     border: 1px solid var(--clr-blue);
 }
-.inputs > input:nth-of-type(even) {
+.inputs > .input > input:nth-of-type(even) {
     margin-left: 8px;
 }
-.inputs > input::-webkit-outer-spin-button,
-.inputs > input::-webkit-inner-spin-button {
+.inputs > .input > input::-webkit-outer-spin-button,
+.inputs > .input > input::-webkit-inner-spin-button {
     appearance: none;
+    scroll-behavior: none;
 }
 .grid-inputs {
     display: grid;
-    grid-template-columns: 0.85fr 0.15fr;
+    grid-template-columns: 0.8fr 0.2fr;
     column-gap: 5px;
 }
-.grid-inputs > input:nth-of-type(even) {
+.grid-inputs-even {
+    grid-template-columns: auto auto;
+}
+.grid-inputs-full {
+    grid-template-columns: 1fr;
+}
+.grid-inputs > .input > input:nth-of-type(even) {
     margin-left: 0;
+    text-align: center;
 }
 .form-consulta > button {
     font-size: 0.9em;
@@ -128,14 +136,33 @@
     margin-top: 20px;
     color: #919191;
 }
+.input {
+    position: relative;
+}
+.hint {
+    position: absolute;
+    font-size: 0.8em;
+    color: var(--clr-dark-gray);
+    left: 2%;
+    top: -40%;
+}
+.text-center {
+    text-align: center;
+}
 
 /* list ================================================================ */
+.form {
+    width: 100%;
+}
 table {
     border-collapse: collapse;
     font-size: 0.8em;
     text-align: center;
+    width: 418px;
+    min-width: fit-content;
+    max-width: 95%;
+    margin: auto;
     margin-top: 15px;
-    width: 100%;
     border: 0.1px solid #d3d3d3;
 }
 td, th {
@@ -143,18 +170,13 @@ td, th {
     padding: 10px 10px;
     text-align: left;
 }
-/* th {
-    border-radius: 50px 0 0 50px;
-}
-td {
-    border-radius: 0 50px 50px 0;
-} */
 tr:nth-of-type(even) {
     background-color: #e6e6e6;
 }
 tr:not(:last-child) {
     border-bottom: 0.1px solid #d3d3d3;
 }
+
 .titulo-resultado {
     margin-top: 25px;
     text-align: center;
@@ -166,14 +188,24 @@ tr:not(:last-child) {
 }
 
 /* insert list ========================================================= */
+.insert-list-container {
+    width: 100%;
+}
+.insert-table-body > tr {
+    display: grid;
+    grid-template-columns: 8em auto;
+    align-items: center;
+}
 .text-right {
     text-align: right;
 }
 .insert-list-input-row {
     padding: 5px 5px;
+    max-width: 100%;
+    display: block;
 }
 .insert-list-input {
-    width: 240px;
+    width: 100%;
     border: 0;
     padding: 5px 10px;
     border-radius: 10px 50px 50px 10px;

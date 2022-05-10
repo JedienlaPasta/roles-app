@@ -17,7 +17,7 @@ export const fetchRoles = (rol) => axios.get('/roles/rol', { params: rol })
 
 export const fetchRolesByRUT = (rut) => axios.get('/roles/rut', { params: rut })
 
-export const fetchRolesByDIR = (dir) => axios.get('/roles/dir', { params: dir })
+export const fetchRolesByDIR = (dir, quantity) => axios.get('/roles/dir', { params: { dir: dir, quantity: quantity } })
 
 // Permisos
 // const permisos_url = 'https://localhost:5000/permisos'
@@ -32,4 +32,4 @@ export const createPermiso = (permiso) => axios.post('permisos/create', { permis
 
 export const updatePermiso = (permiso) => axios.patch('/permisos/update', { permiso })
 
-export const deletePermiso = (rol) => axios.delete('/permisos/delete', { params: rol })
+export const deletePermiso = (id) => axios.delete('/permisos/delete', { params: id })

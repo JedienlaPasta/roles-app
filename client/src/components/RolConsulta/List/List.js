@@ -56,7 +56,7 @@ export default function List({ save, deletePermiso }) {
     }
 
     return (
-        <form>
+        <form className='form'>
             {   user.role === 'admin' && type !== 'insert' && type !== 'update' &&
                 <div>
                     <p className='warning'>Cuidado, usted tiene permisos para editar y eliminar registros</p>

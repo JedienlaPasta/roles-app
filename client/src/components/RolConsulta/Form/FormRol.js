@@ -26,9 +26,15 @@ export default function FormRol({ crudFilter, setCrudFilter}) {
 
     return (
         <form className='form-consulta' onSubmit={handleSubmit}>
-            <span className='inputs'>
-            <input type='number' name='rol_1' required placeholder='Ingresar MZ...' value={rol.matriz} onChange={(e) => setRol(item => ({...item, matriz: e.target.value}))} />
-            <input type='number' name='rol_2' required placeholder='Ingresar PD...' value={rol.digito} onChange={(e) => setRol(item => ({...item, digito: e.target.value}))} />
+            <span className='inputs grid-inputs grid-inputs-even'>
+                <div className="input">
+                    <label className='hint'>MZ</label>
+                    <input type='number' name='rol_1' required placeholder='Ingresar MZ...' value={rol.matriz} onChange={(e) => setRol(item => ({...item, matriz: e.target.value}))} />
+                </div>
+                <div className="input">
+                    <label className='hint'>PD</label>
+                    <input type='number' name='rol_2' required placeholder='Ingresar PD...' value={rol.digito} onChange={(e) => setRol(item => ({...item, digito: e.target.value}))} />
+                </div>
             </span>
             <br />
             <button type='submit'>Buscar</button>

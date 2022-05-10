@@ -26,4 +26,4 @@ export default function App() {
 // TODO list
 // import & export excel files to & from mongodb, all this from the web app
 // refactor code
-// 
+// response message when searching for roles/permisos in case the result is []

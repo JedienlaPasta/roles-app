@@ -14,12 +14,12 @@ const reducer = (roles, action) => {
     }
 }
 
-const initialState = []
+const reducerInitialState = []
 
 export const DataContext = createContext()
 
 export const DataProvider = ({ children }) => {
-    const [roles, dispatch] = useReducer(reducer, initialState)
+    const [roles, dispatch] = useReducer(reducer, reducerInitialState)
     const [user, setUser] = useState({name: '', role: ''})
     const [isAuth, setIsAuth] = useState(false) // 'is the user authenticated?'
     const [isLoaded, setIsLoaded] = useState(false)
@@ -27,8 +27,11 @@ export const DataProvider = ({ children }) => {
     const [page, setPage] = useState('')
     const [rolIndex, setRolIndex] = useState(0)
     const [showPopup, setShowPopup] = useState(false)
-    const [newPermiso, setNewPermiso] = useState({ MATRIZ: '', DIGITO: '', NOMBRE: '', APELLIDO_P: '', APELLIDO_M: '', MZ: '', NSTPC: '', CALLE: '', SECTOR: '', N_VIV: '', M2_C_RECEP: '', M2_C_PERM: '', M2_S_PERM: '', M2_TOTAL: '', ESTADO: '' })
     const [crudFilter, setCrudFilter] = useState({ crudType: 'Consultar', filter: 'ROL', type: 'read', filters: ['Ingresar', 'Consultar']})
+
+    const permisoInitialValue = crudFilter.type !== 'insert' ? { _id: '', MATRIZ: '', DIGITO: '', NOMBRE: '', APELLIDO_P: '', APELLIDO_M: '', MZ: '', NSTPC: '', CALLE: '', SECTOR: '', N_VIV: '', M2_C_RECEP: '', M2_C_PERM: '', M2_S_PERM: '', M2_TOTAL: '', ESTADO: '' }
+    : { MATRIZ: '', DIGITO: '', NOMBRE: '', APELLIDO_P: '', APELLIDO_M: '', MZ: '', NSTPC: '', CALLE: '', SECTOR: '', N_VIV: '', M2_C_RECEP: '', M2_C_PERM: '', M2_S_PERM: '', M2_TOTAL: '', ESTADO: '' }
+    const [newPermiso, setNewPermiso] = useState(permisoInitialValue)
 
     useEffect(() => {
         isAuthenticated().then(data => {
@@ -37,12 +40,6 @@ export const DataProvider = ({ children }) => {
             setIsLoaded(true)
         })
     }, [])
-
-    // delete =====================================================================================
-    useEffect(() => {
-        console.log('Is the user authenticated?: '+isAuth)
-        console.log(user)
-    }, [isAuth, user])
 
     useEffect(() => {
         if (crudFilter.type !== 'insert') {
@@ -59,7 +56,7 @@ export const DataProvider = ({ children }) => {
         <div>
             {
                 !isLoaded ? <h1>Loading...</h1> :
-                <DataContext.Provider value={{ roles, dispatch, user, setUser, isAuth, setIsAuth, page, setPage, message, setMessage, newPermiso, setNewPermiso,showPopup, setShowPopup, rolIndex, setRolIndex, crudFilter, setCrudFilter }}>
+                <DataContext.Provider value={{ roles, dispatch, user, setUser, isAuth, setIsAuth, page, setPage, message, setMessage, newPermiso, setNewPermiso, permisoInitialValue, showPopup, setShowPopup, rolIndex, setRolIndex, crudFilter, setCrudFilter }}>
                     { children }
                 </DataContext.Provider>
             }

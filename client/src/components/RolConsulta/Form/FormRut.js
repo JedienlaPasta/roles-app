@@ -22,8 +22,11 @@ export default function FormRut() {
 
     return (
         <form className='form-consulta' onSubmit={handleSubmit}>
-            <span className='inputs'>
-            <input type='number' name='rut' required placeholder='Ingresar RUT sin DV...' value={rut} onChange={(e) => setRut(e.target.value)} />
+            <span className='inputs grid-inputs grid-inputs-full'>
+                <div className="input">
+                    <label className='hint'>RUT</label>
+                    <input type='number' name='rut' required placeholder='Ingresar RUT sin DV...' value={rut} onChange={(e) => setRut(e.target.value)} />
+                </div>
             </span>
             <br />
             <button type='submit'>Buscar</button>

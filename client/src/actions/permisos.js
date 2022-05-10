@@ -1,10 +1,9 @@
-import { fetchPermisos, fetchPermisosByRUT, fetchPermisosByDIR, createPermiso, updatePermiso, deletePermiso } from "../api/api"
+import { fetchPermisos, fetchPermisosByDIR, createPermiso, updatePermiso, deletePermiso } from "../api/api"
 import { ACTIONS } from "../context/DataContext"
 
 export const getPermisos = async (rol, dispatch) => {
     try {
         const { data } = await fetchPermisos(rol)
-        console.log(data)
         dispatch({ type: ACTIONS.FETCH_MATCHES, payload: data })
     } catch (error) {
         if (error.response) {
@@ -25,8 +24,6 @@ export const getPermisosByDIR = async (dir, quantity, dispatch) => {
         if (error.response) {
             // setTimeout(() => setMessage(error.response.data.message), 500)
             console.log(error.response.data.message)
-            // console.log(error.response.data)
-            // console.log(error.response.status)
         }
     }
 }
@@ -55,9 +52,9 @@ export const patchPermiso = async (permiso, setMessage) => {
     }
 }
 
-export const delPermiso = async (rol, setMessage) => {
+export const delPermiso = async (id, setMessage) => {
     try {
-        const { data } = await deletePermiso(rol)
+        const { data } = await deletePermiso(id)
         setTimeout(() => setMessage(data.message), 500)
     } catch (error) {
         if (error.response) {

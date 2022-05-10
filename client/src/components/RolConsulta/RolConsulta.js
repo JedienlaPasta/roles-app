@@ -10,7 +10,7 @@ import './style.css'
 import Popup from './Popups/Popup'
 
 export default function AppBody() {
-    const { roles, user, isAuth, dispatch, setPage, showPopup, setShowPopup, crudFilter, setCrudFilter, setNewPermiso } = useContext(DataContext)
+    const { roles, user, isAuth, dispatch, setPage, showPopup, setShowPopup, crudFilter, setCrudFilter, setNewPermiso, permisoInitialValue } = useContext(DataContext)
     const history = useNavigate()
     const filters = [
         ['ROL', <FormRol key={'rol'} crudFilter={crudFilter} setCrudFilter={setCrudFilter}/>], 
@@ -25,7 +25,7 @@ export default function AppBody() {
 
     useEffect(() => {
         dispatch({ type: ACTIONS.FETCH_MATCHES, payload: [] })
-        setNewPermiso({ MATRIZ: '', DIGITO: '', NOMBRE: '', APELLIDO_P: '', APELLIDO_M: '', MZ: '', NSTPC: '', CALLE: '', SECTOR: '', N_VIV: '', M2_C_RECEP: '', M2_C_PERM: '', M2_S_PERM: '', M2_TOTAL: '', ESTADO: '' })
+        setNewPermiso(permisoInitialValue)  // se reestablece el valor de newPermiso a su estado original (vacio)
         if (!isAuth) return history('/auth')
     }, [isAuth, crudFilter.crudType])
 

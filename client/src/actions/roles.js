@@ -19,9 +19,9 @@ export const getRolesByRUT = async (rut, dispatch) => {
     }
 }
 
-export const getRolesByDIR = async (dir, dispatch) => {
+export const getRolesByDIR = async (dir, quantity, dispatch) => {
     try {
-        const { data } = await fetchRolesByDIR({ dir: dir })
+        const { data } = await fetchRolesByDIR(dir, quantity)
         dispatch({ type: ACTIONS.FETCH_MATCHES, payload: data })
     } catch (error) {
         console.log(error.message)

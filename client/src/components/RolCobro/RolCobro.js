@@ -12,7 +12,6 @@ export default function AppBody() {
     const filters = [['ROL', <FormRol key={'rol'}/>], ['RUT', <FormRut key={'rut'}/>], ['DIR', <FormDir key={'dir'}/>]]
     const { roles, isAuth, dispatch, setPage } = useContext(DataContext)
     const history = useNavigate()
-    console.log(roles)
     
     const displayFilters = filters.map(item => <Filter key={item} val={item[0]} filter={filter} setFilter={setFilter} />)
 

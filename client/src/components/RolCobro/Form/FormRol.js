@@ -25,9 +25,15 @@ export default function FormRol() {
 
     return (
         <form className='form-consulta' onSubmit={handleSubmit}>
-            <span className='inputs'>
-            <input type='number' name='rol_1' required placeholder='Ingresar MZ...' value={rol.rol1} onChange={(e) => setRol(item => ({...item, rol1: e.target.value}))} />
-            <input type='number' name='rol_2' required placeholder='Ingresar PD...' value={rol.rol2} onChange={(e) => setRol(item => ({...item, rol2: e.target.value}))} />
+            <span className='inputs grid-inputs grid-inputs-even'>
+                <div className="input">
+                    <label className='hint'>MZ</label>
+                    <input type='number' name='rol_1' required placeholder='Ingresar MZ...' value={rol.rol1} onChange={(e) => setRol(item => ({...item, rol1: e.target.value}))} />
+                </div>
+                <div className="input">
+                    <label className='hint'>PD</label>
+                    <input type='number' name='rol_2' required placeholder='Ingresar PD...' value={rol.rol2} onChange={(e) => setRol(item => ({...item, rol2: e.target.value}))} />
+                </div>
             </span>
             <br />
             <button type='submit'>Buscar</button>
