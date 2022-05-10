@@ -11,7 +11,7 @@ import userRoutes from './routes/user.js'
 const app = express()
 dotenv.config()
 
-app.use(express.json({ extended: true }))
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(cors())
@@ -24,7 +24,6 @@ app.get('/', (req, res) => {
     res.send('Welcome to Roles API')
 })
 
-const CONNECTION_URL = 'mongodb+srv://mongo:BELC6ZxeB53MnQza@rolescluster.u7c3e.mongodb.net/rolesDB?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000
 
 mongoose.connect(process.env.CONNECTION_URL || CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })

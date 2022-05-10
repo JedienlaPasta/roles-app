@@ -2,59 +2,32 @@ import RolData from "../models/rolesData.js";
 
 export const getRoles = async (req, res) => {
     const roles = req.query
-    console.log(roles) //==================================
     try {
         const rolesData = await RolData.find({ ROL_AVALUO_1: roles.rol1, ROL_AVALUO_2: roles.rol2 })
-        // console.log(rolesData)
         res.status(200).json(rolesData)
     } catch (error) {
-        res.status(404).json({ message: error.message })
+        res.status(404).json({ message: 'No se encontraron resultados' })
     }
 }
 
 export const getRolesByRUT = async (req, res) => {
     const rut = req.query.rut
     try {
-        const reg = await RolData.find({ RUT: rut }) // maybe set a max amount
+        const reg = await RolData.find({ RUT: rut })
         res.status(200).json(reg)
     } catch (error) {
-        res.status(404).json({ message: error.message })
+        res.status(404).json({ message: 'No se encontraron resultados' })
     }
 }
 
 export const getRolesByDIR = async (req, res) => {
     const dir = req.query.dir || 'empty'
+    const quantity = req.query.quantity || 1
+    console.log(req.query)
     try {
-    const reg = await RolData.find({ DIRECCION: {$regex: dir, $options: 'i'} }).limit(5)
-    // console.log(reg)
+        const reg = await RolData.find({ DIRECCION: {$regex: dir, $options: 'i'} }).limit(quantity)
         res.status(200).json(reg)
     } catch (error) {
-        res.status(404).json({ message: error.message })
-    }
-}
-
-export const createRol = async (req, res) => {
-    res.status(200).json({ message: 'post rol' })
-}
-// export const getRolById = async (req, res) => {
-//     const rol = await RolData.findById(req.params.id)
-//     if (rol) {
-//         res.status(200).json({rol, op: 'success'})
-//     }
-// }
-
-export const updateRol = async (req, res) => {
-    const rol = await RolData.findById(req.params.id)
-    // res.status(200).json({ message: 'rol updated' })
-    if (rol) {
-        res.status(200).json({ rol, message: 'rol updated' })
-    }
-}
-
-export const deleteRol = async (req, res) => {
-    const rol = await RolData.findById(req.params.id)
-    // res.status(200).json({ message: 'rol deleted' })
-    if (rol) {
-        res.status(200).json({ rol, message: 'rol deleted' })
+        res.status(404).json({ message: 'No se encontraron resultados' })
     }
 }
